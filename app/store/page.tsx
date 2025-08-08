@@ -3,7 +3,7 @@
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import { useMemo, useState } from "react"
-import { Container, Row, Col, Form, Button, Badge } from "react-bootstrap"
+import { Container, Row, Col, Form, Button } from "react-bootstrap"
 import { allStoreProducts } from "@/lib/data"
 import ProductCard from "@/components/product-card"
 import { useCart } from "@/components/cart-provider"
@@ -24,10 +24,10 @@ export default function StorePage() {
     <div>
       <SiteHeader />
       <main>
-        <section className="py-5">
-          <Container>
-            <Badge bg="secondary" className="rounded-pill">Tienda</Badge>
-            <h1 className="h2 fw-semibold mt-2">Compra directa</h1>
+        <section className="section">
+          <Container fluid="xl">
+            <span className="badge badge-soft rounded-pill">Tienda</span>
+            <h1 className="h2 fw-semibold mt-2 text-gradient">Compra directa</h1>
             <p className="text-muted">Servidores, workstations, laptops/notebooks, tablets, pantallas, impresoras, data center, partes y piezas, y más.</p>
 
             <Row className="g-2 align-items-stretch mb-3">
@@ -39,7 +39,7 @@ export default function StorePage() {
                   <button
                     key={c}
                     onClick={() => setCategory(c)}
-                    className={`btn btn-sm ${category === c ? "btn-success" : "btn-outline-secondary"}`}
+                    className={`badge ${category === c ? "badge-soft" : "text-bg-light border"} rounded-pill py-2 px-3`}
                     aria-pressed={category === c}
                   >
                     {c}
@@ -57,7 +57,7 @@ export default function StorePage() {
             </Row>
 
             <div className="d-flex justify-content-center mt-3">
-              <Button onClick={openCart} variant="success">Ver Carrito</Button>
+              <Button onClick={openCart} className="btn-cta px-4">Ver Carrito</Button>
             </div>
           </Container>
         </section>

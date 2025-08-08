@@ -20,8 +20,8 @@ export default function MediaGallery({ items = [] as MediaItem[] }) {
           if (it.type === "image") {
             return (
               <Col key={i} sm={6} lg={4}>
-                <div className="rounded border overflow-hidden">
-                  <div className="ratio ratio-16x9">
+                <div className="media-tile ratio ratio-16x9">
+                  <div className="inner">
                     <Image
                       src={it.src || "/placeholder.svg"}
                       alt={it.alt}
@@ -36,21 +36,25 @@ export default function MediaGallery({ items = [] as MediaItem[] }) {
           return (
             <Col key={i} sm={6} lg={4}>
               <button
-                className="position-relative w-100 rounded border overflow-hidden ratio ratio-16x9"
+                className="media-tile ratio ratio-16x9"
                 onClick={() => { setVideoSrc(it.src); setOpen(true) }}
                 aria-label={`Reproducir video: ${it.alt}`}
               >
-                <video
-                  src={it.src}
-                  muted
-                  playsInline
-                  loop
-                  poster={it.poster}
-                  className="position-absolute top-0 start-0 w-100 h-100"
-                  style={{ objectFit: "cover", opacity: 0.9 }}
-                />
-                <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(0,0,0,0.2)" }} />
-                <Play className="position-absolute top-50 start-50 translate-middle text-white" size={32} />
+                <div className="inner">
+                  <video
+                    src={it.src}
+                    muted
+                    playsInline
+                    loop
+                    poster={it.poster}
+                    className="position-absolute top-0 start-0 w-100 h-100"
+                    style={{ objectFit: "cover", opacity: 0.92 }}
+                  />
+                </div>
+                <div className="media-overlay" />
+                <span className="play-btn">
+                  <Play size={20} />
+                </span>
               </button>
             </Col>
           )

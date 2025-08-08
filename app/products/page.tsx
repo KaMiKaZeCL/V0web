@@ -23,10 +23,10 @@ export default function ProductsPage() {
     <div>
       <SiteHeader />
       <main>
-        <section className="py-5">
-          <Container>
+        <section className="section">
+          <Container fluid="xl">
             <Badge bg="secondary" className="rounded-pill">Productos</Badge>
-            <h1 className="h2 fw-semibold mt-2">Plataformas, hardware y software listos</h1>
+            <h1 className="h2 fw-semibold mt-2 text-gradient">Plataformas, hardware y software listos</h1>
             <p className="text-muted">Desde servidores y workstations, hasta laptops/notebooks, tablets, pantallas, impresoras, data center y partes y piezas. También plataformas de IA, nube y seguridad.</p>
 
             <Row className="g-2 align-items-stretch mb-3">
@@ -38,7 +38,7 @@ export default function ProductsPage() {
                   <button
                     key={c}
                     onClick={() => setCategory(c)}
-                    className={`btn btn-sm ${category === c ? "btn-success" : "btn-outline-secondary"}`}
+                    className={`badge ${category === c ? "badge-soft" : "text-bg-light border"} rounded-pill py-2 px-3`}
                     aria-pressed={category === c}
                   >
                     {c}
@@ -50,7 +50,7 @@ export default function ProductsPage() {
             <Row className="g-3">
               {items.map((p) => (
                 <Col key={p.id} sm={6} lg={4}>
-                  <Card className="h-100">
+                  <Card className="h-100 card-hover">
                     <div className="ratio ratio-16x9">
                       <Image src={p.image || "/placeholder.svg"} alt={p.name} fill style={{ objectFit: "cover" }} />
                     </div>

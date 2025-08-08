@@ -10,10 +10,11 @@ export default function ServicesPage() {
     <div>
       <SiteHeader />
       <main>
-        <section className="py-5">
-          <Container>
+        <section className="section position-relative">
+          <div className="aurora" aria-hidden />
+          <Container fluid="xl">
             <Badge bg="secondary" className="rounded-pill">Metodología y Servicios</Badge>
-            <h1 className="h2 fw-semibold mt-2">Estrategia, delivery y operación con métricas</h1>
+            <h1 className="h2 fw-semibold mt-2 text-gradient">Estrategia, delivery y operación con métricas</h1>
             <p className="text-muted">
               Operamos con <GlossaryLink termKey="okr">OKRs</GlossaryLink>, <GlossaryLink termKey="kpi">KPIs</GlossaryLink> y <GlossaryLink termKey="sla">SLAs</GlossaryLink>. Desde el descubrimiento y la arquitectura, hasta la entrega continua y la
               operación <GlossaryLink termKey="sre">SRE</GlossaryLink>. Trabajamos con datos privados, compliance y seguridad por diseño.
@@ -22,7 +23,7 @@ export default function ServicesPage() {
             <Row className="g-3 mt-1">
               {servicesCatalog.map((s) => (
                 <Col key={s.name} sm={6} lg={4}>
-                  <Card className="h-100">
+                  <Card className="h-100 card-hover">
                     <Card.Body>
                       <Card.Title className="h6 d-flex align-items-center gap-2">{s.icon}{s.name}</Card.Title>
                       <Card.Subtitle className="text-muted small">{s.subtitle}</Card.Subtitle>
@@ -35,7 +36,7 @@ export default function ServicesPage() {
               ))}
             </Row>
 
-            <div className="mt-4">
+            <div className="mt-5">
               <h2 className="h4 fw-semibold">Demostraciones</h2>
               <p className="text-muted">Videos e imágenes de nuestras plataformas en acción.</p>
               <MediaGallery

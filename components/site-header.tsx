@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Navbar, Container, Nav, Button, Offcanvas } from "react-bootstrap"
-import { useState } from "react"
+import { Navbar, Container, Nav, Button } from "react-bootstrap"
+import { useEffect, useState } from "react"
 import { ShoppingCart } from 'lucide-react'
 import { useCart } from "./cart-provider"
 import CartSheet from "./cart-sheet"
@@ -20,70 +20,52 @@ const nav = [
 export default function SiteHeader() {
   const pathname = usePathname()
   const { openCart } = useCart()
-  const [show, setShow] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
     <>
-      <Navbar bg="light" expand="md" fixed="top" className="border-bottom">
-        <Container>
+      <Navbar expand="md" fixed="top" className={`navbar-blur ${scrolled ? "scrolled" : ""}`}>
+        <Container fluid="xl">
           <Navbar.Brand as={Link} href="/" className="d-flex align-items-center gap-2">
-            <span className="d-inline-block rounded" style={{ width: 32, height: 32, backgroundColor: "#0ea5a4" }} aria-hidden />
-            South Developers
+            <span className="d-inline-block rounded-circle" style={{ width: 30, height: 30, background: "linear-gradient(135deg, var(--sd-primary), var(--sd-accent))" }} aria-hidden />
+            <span className="fw-semibold">South Developers</span>
           </Navbar.Brand>
-          <div className="ms-auto d-flex align-items-center gap-2 d-md-none">
-            <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
-              <ShoppingCart size={18} />
-            </Button>
-            <Navbar.Toggle aria-controls="primary-nav" onClick={() => setShow(true)} />
-          </div>
-          <Navbar.Collapse id="primary-nav" className="d-none d-md-flex">
-            <Nav className="ms-3">
+          <Navbar.Toggle aria-controls="primary-nav" />
+          <Navbar.Collapse id="primary-nav">
+            <Nav className="ms-2">
               {nav.map((item) => (
                 <Nav.Link
                   as={Link}
                   href={item.href}
                   key={item.href}
                   active={pathname === item.href}
+                  className="px-2"
                 >
                   {item.label}
                 </Nav.Link>
               ))}
             </Nav>
             <div className="ms-auto d-flex align-items-center gap-2">
-              <Button as={Link} href="/contact" variant="outline-secondary">Solicitar demo</Button>
-              <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
+              <Button as={Link} href="/contact" variant="outline-secondary" className="d-none d-md-inline-flex">
+                Solicitar demo
+              </Button>
+              <Button variant="primary" onClick={openCart} aria-label="Abrir carrito" className="d-inline-flex align-items-center gap-1">
                 <ShoppingCart size={18} />
+                <span className="d-none d-sm-inline">Carrito</span>
               </Button>
             </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menú</Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <Nav className="flex-column">
-            {nav.map((item) => (
-              <Nav.Link
-                as={Link}
-                href={item.href}
-                key={item.href}
-                active={pathname === item.href}
-                onClick={() => setShow(false)}
-              >
-                {item.label}
-              </Nav.Link>
-            ))}
-            <hr />
-            <Button as={Link} href="/contact" variant="primary" className="w-100">Solicitar demo</Button>
-          </Nav>
-        </Offcanvas.Body>
-      </Offcanvas>
-
       <CartSheet />
-      <div style={{ height: 64 }} aria-hidden /> {/* spacer for fixed navbar */}
+      <div style={{ height: 72 }} aria-hidden /> {/* spacer for fixed navbar */}
     </>
   )
 }

@@ -12,12 +12,12 @@ export default function AboutPage() {
     <div>
       <SiteHeader />
       <main>
-        <section className="py-5">
-          <Container>
+        <section className="section">
+          <Container fluid="xl">
             <Row className="gy-4 align-items-start">
               <Col md={6}>
                 <Badge bg="secondary" className="rounded-pill">Quiénes somos</Badge>
-                <h1 className="h2 fw-semibold mt-2">Equipo senior, mirada moderna</h1>
+                <h1 className="h2 fw-semibold mt-2 text-gradient">Equipo senior, mirada moderna</h1>
                 <p className="text-muted">
                   Somos un equipo de ingeniería, datos, seguridad y operaciones con experiencia en industrias exigentes. Nos mueve llevar iniciativas a producción con calidad, seguridad y métricas claras.
                 </p>
@@ -28,7 +28,7 @@ export default function AboutPage() {
               <Col md={6}>
                 <Row className="g-3">
                   <Col xs={6}>
-                    <div className="ratio ratio-3x2 rounded border overflow-hidden">
+                    <div className="ratio ratio-3x2 rounded-xl border overflow-hidden shadow-soft">
                       <Image
                         src={"/placeholder.svg?height=360&width=540&query=equipo%20de%20ingenieria%20colaborando%20en%20sala%20moderna"}
                         alt="Equipo de ingeniería colaborando"
@@ -38,7 +38,7 @@ export default function AboutPage() {
                     </div>
                   </Col>
                   <Col xs={6}>
-                    <div className="ratio ratio-3x2 rounded border overflow-hidden">
+                    <div className="ratio ratio-3x2 rounded-xl border overflow-hidden shadow-soft">
                       <Image
                         src={"/placeholder.svg?height=360&width=540&query=sala%20de%20control%20observabilidad%20y%20seguridad"}
                         alt="Sala de control con observabilidad"
@@ -51,7 +51,7 @@ export default function AboutPage() {
               </Col>
             </Row>
 
-            <div className="mt-4">
+            <div className="mt-5">
               <h2 className="h4 fw-semibold">Nuestra cultura en acción</h2>
               <p className="text-muted">Momentos reales de trabajo y demos técnicas.</p>
               <MediaGallery
@@ -63,7 +63,7 @@ export default function AboutPage() {
               />
             </div>
 
-            <div className="mt-4">
+            <div className="mt-5">
               <h2 className="h4 fw-semibold">Liderazgo</h2>
               <Row className="g-3 mt-1">
                 {leaders.map((l) => (
