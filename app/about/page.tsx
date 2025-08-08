@@ -1,44 +1,51 @@
-import { Metadata } from "next"
 import Image from "next/image"
-
-export const metadata: Metadata = {
-  title: "Quiénes somos",
-  description: "Equipo senior, enfoque moderno y ejecución rigurosa.",
-}
+import { Container, Row, Col, Badge } from "react-bootstrap"
+import GlossaryLink from "@/components/glossary-link"
 
 export default function AboutPage() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 md:py-14">
-      <h1 className="text-3xl font-semibold tracking-tight">Quiénes somos</h1>
-      <div className="mt-4 grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="prose prose-stone max-w-none">
-          <p>
-            Somos un equipo de ingeniería, seguridad y datos con experiencia en industrias exigentes.
-            Llevamos iniciativas a producción con calidad, seguridad y métricas claras.
-          </p>
-          <p>
-            Trabajamos con principios SRE, arquitectura moderna y una disciplina operativa que prioriza
-            confiabilidad y velocidad sin artificios.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            { alt: "Equipo", q: "equipo%20en%20sala%20sobria" },
-            { alt: "Operación", q: "sala%20operaciones%20elegante" },
-            { alt: "Arquitectura", q: "arquitectura%20moderna%20diagramas%20sobrios" },
-            { alt: "Pruebas", q: "laboratorio%20hardware%20minimalista" },
-          ].map((img, i) => (
-            <div key={i} className="relative aspect-[4/3] overflow-hidden rounded-md border border-stone-200 bg-stone-100">
-              <Image
-                src={`/placeholder.svg?height=560&width=840&query=${img.q}`}
-                alt={img.alt}
-                fill
-                className="object-cover"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
+    <section className="section">
+      <Container fluid="xl">
+        <Badge bg="secondary" className="rounded-pill">Quiénes somos</Badge>
+        <h1 className="h2 fw-semibold mt-2 text-gradient">Equipo senior, enfoque moderno y ejecución rigurosa</h1>
+        <Row className="gy-4 align-items-start mt-1">
+          <Col md={6}>
+            <p className="text-muted">
+              Somos un equipo de ingeniería, seguridad y datos con experiencia en industrias exigentes. Llevamos iniciativas a producción
+              con calidad, seguridad y métricas claras. Trabajamos con principios <GlossaryLink termKey="sre">SRE</GlossaryLink>, arquitectura componible y prácticas
+              de <GlossaryLink termKey="devex">DevEx</GlossaryLink> que aceleran la entrega sin comprometer confiabilidad.
+            </p>
+            <p className="text-muted">
+              Respetamos regulación y privacidad. Diseñamos <GlossaryLink termKey="dr">DR</GlossaryLink> con <GlossaryLink termKey="slo">SLOs</GlossaryLink> realistas, definimos <GlossaryLink termKey="sli">SLIs</GlossaryLink> útiles
+              y operamos con monitoreo, trazas y <GlossaryLink termKey="observability">observabilidad</GlossaryLink> en serio.
+            </p>
+          </Col>
+          <Col md={6}>
+            <Row className="g-3">
+              <Col xs={6}>
+                <div className="ratio ratio-3x2 rounded-xl border overflow-hidden shadow-soft">
+                  <Image
+                    src={"/placeholder.svg?height=360&width=540&query=equipo%20senior%20tecnologia%20sobria"}
+                    alt="Equipo de ingeniería senior"
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              </Col>
+              <Col xs={6}>
+                <div className="ratio ratio-3x2 rounded-xl border overflow-hidden shadow-soft">
+                  <Image
+                    src={"/placeholder.svg?height=360&width=540&query=centro%20operaciones%20sobrio"}
+                    alt="Centro de operaciones"
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     </section>
   )
 }
