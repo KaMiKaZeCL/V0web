@@ -48,7 +48,7 @@ export default function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3 py-1 text-decoration-none ${active ? "text-primary fw-semibold" : "text-dark"}`}
+                  className={`nav-link-plain ${pathname === item.href ? "active" : ""}`}
                 >
                   {item.label}
                 </Link>
@@ -78,9 +78,7 @@ export default function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`me-2 px-3 py-1 rounded-pill border ${
-                    active ? "badge-soft" : "text-dark text-decoration-none"
-                  }`}
+                  className={`me-2 px-3 py-1 rounded-pill ${pathname === item.href ? "chip chip-active" : "chip"}`}
                 >
                   {item.label}
                 </Link>
