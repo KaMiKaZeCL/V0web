@@ -1,6 +1,7 @@
 import Link from "next/link"
-import { Container, Row, Col } from "react-bootstrap"
-import { Linkedin, Twitter } from 'lucide-react'
+import { Container, Row, Col, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faLinkedin, faXTwitter } from "@fortawesome/free-brands-svg-icons"
 
 export default function SiteFooter() {
   return (
@@ -16,12 +17,16 @@ export default function SiteFooter() {
               Soluciones en IA, nube, ciberseguridad, IoT, drones y software a la medida. Operamos con SLAs exigentes y KPIs visibles.
             </p>
             <div className="d-flex gap-3">
-              <a href="https://www.linkedin.com/company/southdevelopers" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-                <Linkedin size={20} />
-              </a>
-              <a href="https://twitter.com/southdevelopers" target="_blank" rel="noreferrer" aria-label="Twitter">
-                <Twitter size={20} />
-              </a>
+              <OverlayTrigger placement="top" overlay={<Tooltip id="tip-ln">LinkedIn</Tooltip>}>
+                <a href="https://www.linkedin.com/company/southdevelopers" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                  <FontAwesomeIcon icon={faLinkedin} size="lg" />
+                </a>
+              </OverlayTrigger>
+              <OverlayTrigger placement="top" overlay={<Tooltip id="tip-tw">X (Twitter)</Tooltip>}>
+                <a href="https://twitter.com/southdevelopers" target="_blank" rel="noreferrer" aria-label="Twitter">
+                  <FontAwesomeIcon icon={faXTwitter} size="lg" />
+                </a>
+              </OverlayTrigger>
             </div>
           </Col>
           <Col md={2}>

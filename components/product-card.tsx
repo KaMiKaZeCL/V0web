@@ -1,8 +1,10 @@
 "use client"
 
-import { Card, Button, Badge } from "react-bootstrap"
+import { Card, Button, Badge, OverlayTrigger, Tooltip } from "react-bootstrap"
 import Image from "next/image"
 import { useCart } from "./cart-provider"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons"
 
 type Product = {
   id: string
@@ -34,13 +36,16 @@ export default function ProductCard({ product }: { product: Product }) {
         <Card.Text className="text-muted small mt-2">{product.description}</Card.Text>
         <div className="d-flex justify-content-between align-items-center">
           <div className="fw-semibold">{"$" + product.price.toLocaleString()}</div>
-          <Button
-            variant="primary"
-            className="px-3"
-            onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image }, 1)}
-          >
-            Agregar
-          </Button>
+          <OverlayTrigger placement="top" overlay={<Tooltip id={`tip-add-${product.id}`}>Agregar al carrito</Tooltip>}>
+            <Button
+              variant="primary"
+              className="px-3 d-inline-flex align-items-center gap-2"
+              onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image }, 1)}
+            >
+              <FontAwesomeIcon icon={faCartPlus} />
+              <span>Agregar</span>
+            </Button>
+          </OverlayTrigger>
         </div>
       </Card.Body>
     </Card>

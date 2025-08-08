@@ -2,11 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Navbar, Container, Nav, Button, Offcanvas } from "react-bootstrap"
+import { Navbar, Container, Nav, Button, Offcanvas, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { useEffect, useState } from "react"
-import { ShoppingCart } from 'lucide-react'
 import { useCart } from "./cart-provider"
 import CartSheet from "./cart-sheet"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCartShopping, faBars } from "@fortawesome/free-solid-svg-icons"
 
 const nav = [
   { href: "/", label: "Inicio" },
@@ -41,19 +42,28 @@ export default function SiteHeader() {
 
           {/* Desktop actions */}
           <div className="order-lg-3 d-none d-lg-flex align-items-center gap-2">
-            <Button as={Link} href="/contact" variant="outline-secondary">Solicitar demo</Button>
-            <Button variant="primary" onClick={openCart} aria-label="Abrir carrito" className="d-inline-flex align-items-center gap-1">
-              <ShoppingCart size={18} />
-              <span className="d-none d-xl-inline">Carrito</span>
-            </Button>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip id="tip-demo">Conversemos sobre tus objetivos</Tooltip>}>
+              <Button as={Link} href="/contact" variant="outline-secondary">Solicitar demo</Button>
+            </OverlayTrigger>
+            <OverlayTrigger placement="bottom" overlay={<Tooltip id="tip-cart">Abrir carrito</Tooltip>}>
+              <Button variant="primary" onClick={openCart} aria-label="Abrir carrito" className="d-inline-flex align-items-center gap-2">
+                <FontAwesomeIcon icon={faCartShopping} />
+                <span className="d-none d-xl-inline">Carrito</span>
+              </Button>
+            </OverlayTrigger>
           </div>
 
           {/* Mobile toggles */}
           <div className="ms-auto order-lg-2 d-flex d-lg-none align-items-center gap-2">
-            <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
-              <ShoppingCart size={18} />
-            </Button>
-            <Navbar.Toggle aria-controls="primary-offcanvas" onClick={() => setShow(true)} />
+            <OverlayTrigger placement="bottom" overlay={<Tooltip id="tip-cart-m">Carrito</Tooltip>}>
+              <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
+                <FontAwesomeIcon icon={faCartShopping} />
+              </Button>
+            </OverlayTrigger>
+            <Navbar.Toggle aria-controls="primary-offcanvas" onClick={() => setShow(true)}>
+              <span className="visually-hidden">Abrir menú</span>
+              <FontAwesomeIcon icon={faBars} />
+            </Navbar.Toggle>
           </div>
 
           {/* Desktop nav */}

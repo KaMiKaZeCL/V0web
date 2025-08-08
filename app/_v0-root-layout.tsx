@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "./globals.css"
 import "./brand.css"
+import "@/lib/fa" // Font Awesome core CSS loaded once
 import type { Metadata } from "next"
 import { Inter } from 'next/font/google'
 import { CartProvider } from "@/components/cart-provider"
@@ -16,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <body className={inter.className}>
-        {/* Importing CSS in the root layout is the recommended approach with the App Router. [^2] */}
+        {/* Importing CSS through JS entry points is supported by Next.js, and global styles belong in the root layout. [^1] */}
         <CartProvider>
           {children}
         </CartProvider>
