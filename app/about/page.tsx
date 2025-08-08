@@ -4,6 +4,8 @@ import Image from "next/image"
 import { LeaderCard } from "@/components/leader-card"
 import { leaders } from "@/lib/data"
 import { Badge } from "@/components/ui/badge"
+import MediaGallery from "@/components/media-gallery"
+import GlossaryLink from "@/components/glossary-link"
 
 export default function AboutPage() {
   return (
@@ -19,7 +21,7 @@ export default function AboutPage() {
               mueve llevar iniciativas a producción con calidad, seguridad y métricas claras.
             </p>
             <p className="mt-4 text-slate-600">
-              Operamos con principios SRE, arquitectura modular y prácticas de Developer Experience que aceleran la
+              Operamos con principios <GlossaryLink termKey="sre">SRE</GlossaryLink>, arquitectura modular y prácticas de <GlossaryLink termKey="devex">DevEx</GlossaryLink> que aceleran la
               entrega sin sacrificar confiabilidad. Respetamos la regulación y cuidamos tus datos.
             </p>
           </div>
@@ -37,6 +39,20 @@ export default function AboutPage() {
               width={540}
               height={360}
               className="rounded-xl border object-cover"
+            />
+          </div>
+        </div>
+
+        <div className="mt-10">
+          <h2 className="text-2xl md:text-3xl font-semibold">Nuestra cultura en acción</h2>
+          <p className="text-slate-600 mt-2">Momentos reales de trabajo y demos técnicas.</p>
+          <div className="mt-4">
+            <MediaGallery
+              items={[
+                { type: "video", src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", poster: "/arquitectura-workshop.png", alt: "Workshop de arquitectura" },
+                { type: "image", src: "/placeholder.svg?height=600&width=900", alt: "Whiteboard de plataformas" },
+                { type: "image", src: "/placeholder.svg?height=600&width=900", alt: "Revisión de seguridad Zero Trust" },
+              ]}
             />
           </div>
         </div>

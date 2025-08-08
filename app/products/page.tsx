@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import Image from "next/image"
 import { allProducts } from "@/lib/data"
+import GlossaryLink from "@/components/glossary-link"
 
 export default function ProductsPage() {
   const [q, setQ] = useState("")
@@ -26,7 +27,8 @@ export default function ProductsPage() {
       <main className="container max-w-6xl mx-auto px-4 py-12 md:py-16">
         <div className="mb-6">
           <Badge variant="secondary" className="rounded-full">Productos</Badge>
-          <h1 className="text-3xl md:text-4xl font-semibold mt-3">Plataformas y soluciones listas</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold mt-3">Plataformas, hardware y software listos</h1>
+          <p className="text-slate-600 mt-2">Desde <strong>servidores</strong> y <strong>workstations</strong>, hasta <strong>laptops/notebooks</strong>, <strong>tablets</strong>, <strong>pantallas</strong>, <strong>impresoras</strong>, <strong>data center</strong> y <strong>partes y piezas</strong>. También plataformas de IA, nube y seguridad.</p>
         </div>
         <div className="flex flex-col md:flex-row items-stretch gap-3 mb-6">
           <Input placeholder="Buscar productos..." value={q} onChange={(e) => setQ(e.target.value)} />
@@ -65,6 +67,10 @@ export default function ProductsPage() {
               </CardHeader>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-10 text-sm text-slate-600">
+          Nota: Integramos <GlossaryLink termKey="finops">FinOps</GlossaryLink> para optimizar costos de infraestructura y plataformas.
         </div>
       </main>
       <SiteFooter />

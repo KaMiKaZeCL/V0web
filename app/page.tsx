@@ -8,7 +8,9 @@ import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import AuroraHero from "@/components/aurora-hero"
 import MarqueeLogos from "@/components/marquee-logos"
+import MediaGallery from "@/components/media-gallery"
 import { clients } from "@/lib/data"
+import GlossaryLink from "@/components/glossary-link"
 
 export default function Page() {
   return (
@@ -19,9 +21,7 @@ export default function Page() {
         <AuroraHero
           eyebrow="Consultoría + Ingeniería + Operaciones"
           title="Diseñamos, construimos y operamos para producción"
-          subtitle="Transformamos objetivos de negocio en plataformas y servicios confiables. Agentes de IA, nubes híbridas, ciberseguridad, IoT y software a la medida, con métricas claras, SLAs exigentes y foco en valor."
-          primaryCta={{ href: "/contact", label: "Agenda una reunión" }}
-          secondaryCta={{ href: "/services", label: "Ver cómo trabajamos" }}
+          subtitle="Transformamos objetivos de negocio en plataformas y servicios confiables. Agentes de IA, nubes híbridas, ciberseguridad, IoT y software a la medida, con métricas claras, "
         />
 
         {/* Logos en marquee */}
@@ -44,14 +44,15 @@ export default function Page() {
                   Tecnología que impacta KPIs del negocio
                 </h2>
                 <p className="mt-4 text-slate-600 text-lg">
-                  Combinamos estrategia, arquitectura y entrega continua para acelerar el time‑to‑value. Operamos con
-                  OKRs y KPIs visibles —desde uptime y seguridad, hasta lead time de cambios— y asumimos SLAs que
-                  responden a la criticidad de tu operación.
+                  Combinamos estrategia, arquitectura y entrega continua para acelerar el time‑to‑value. Operamos con{" "}
+                  <GlossaryLink termKey="okr">OKRs</GlossaryLink> y{" "}
+                  <GlossaryLink termKey="kpi">KPIs</GlossaryLink> visibles —desde uptime y seguridad, hasta lead time de cambios— y
+                  asumimos <GlossaryLink termKey="sla">SLAs</GlossaryLink> que responden a la criticidad de tu operación.
                 </p>
                 <ul className="mt-6 space-y-3 text-sm text-slate-700">
                   <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Enfoque AI‑first y plataformas componibles</li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Seguridad por diseño y observabilidad e2e</li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Operación SRE con compromisos explícitos</li>
+                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Seguridad por diseño y <GlossaryLink termKey="observability">observabilidad</GlossaryLink> e2e</li>
+                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Operación <GlossaryLink termKey="sre">SRE</GlossaryLink> con compromisos explícitos</li>
                 </ul>
                 <div className="mt-6 flex gap-3">
                   <Button asChild className="bg-emerald-600 hover:bg-emerald-700">
@@ -72,17 +73,17 @@ export default function Page() {
                     <CardContent className="grid grid-cols-2 gap-3 text-sm">
                       <div><div className="text-2xl font-semibold">99,95%</div><div className="text-slate-500">Uptime</div></div>
                       <div><div className="text-2xl font-semibold">{'< 24h'}</div><div className="text-slate-500">Lead time cambios</div></div>
-                      <div><div className="text-2xl font-semibold">{'< 60m'}</div><div className="text-slate-500">MTTR</div></div>
+                      <div><div className="text-2xl font-semibold">{'< 60m'}</div><div className="text-slate-500"><GlossaryLink termKey="mttr">MTTR</GlossaryLink></div></div>
                       <div><div className="text-2xl font-semibold">{'> 70'}</div><div className="text-slate-500">NPS</div></div>
                     </CardContent>
                   </Card>
                   <Card>
                     <CardHeader className="pb-2">
                       <CardTitle className="flex items-center gap-2 text-lg"><ShieldCheck className="w-5 h-5 text-violet-600" /> Seguridad y cumplimiento</CardTitle>
-                      <CardDescription>Zero Trust, IAM y hardening</CardDescription>
+                      <CardDescription><GlossaryLink termKey="zero-trust">Zero Trust</GlossaryLink>, <GlossaryLink termKey="iam">IAM</GlossaryLink> y hardening</CardDescription>
                     </CardHeader>
                     <CardContent className="text-sm text-slate-600">
-                      Gestión de identidades, MFA, segmentación, escaneo continuo (SAST/DAST), política de parches y
+                      <GlossaryLink termKey="iam">Gestión de identidades</GlossaryLink>, <GlossaryLink termKey="mfa">MFA</GlossaryLink>, segmentación, escaneo continuo (<GlossaryLink termKey="sast">SAST</GlossaryLink>/<GlossaryLink termKey="dast">DAST</GlossaryLink>), política de parches y
                       respuesta a incidentes con runbooks. Alineados a ISO/IEC 27001 y NIST.
                     </CardContent>
                   </Card>
@@ -110,7 +111,7 @@ export default function Page() {
                 icon={<Bot className="w-5 h-5 text-violet-600" />}
                 title="Agentes de IA"
                 points={[
-                  "RAG evaluado y trazable",
+                  <span key="p1"><GlossaryLink termKey="rag">RAG</GlossaryLink> evaluado y trazable</span> as unknown as string,
                   "Orquestación con herramientas",
                   "Guardrails y observabilidad LLM",
                 ]}
@@ -120,8 +121,8 @@ export default function Page() {
                 icon={<Cloud className="w-5 h-5 text-emerald-600" />}
                 title="Nube y Plataformas"
                 points={[
-                  "IDP, plataformas componibles",
-                  "FinOps y resiliencia",
+                  <span key="p2"><GlossaryLink termKey="idp">IDP</GlossaryLink> y plataformas componibles</span> as unknown as string,
+                  <span key="p3"><GlossaryLink termKey="finops">FinOps</GlossaryLink> y resiliencia</span> as unknown as string,
                   "SRE 24/7 y performance",
                 ]}
                 outcome="Ejecución consistente y costos bajo control."
@@ -130,7 +131,7 @@ export default function Page() {
                 icon={<Factory className="w-5 h-5 text-emerald-600" />}
                 title="IoT y Edge"
                 points={[
-                  "Redes 5G/LoRa y edge AI",
+                  <span key="p4">Redes <GlossaryLink termKey="5g">5G</GlossaryLink>/<GlossaryLink termKey="lorawan">LoRaWAN</GlossaryLink> y edge AI</span> as unknown as string,
                   "Telemetría y control en tiempo real",
                   "Seguridad de dispositivos",
                 ]}
@@ -141,7 +142,7 @@ export default function Page() {
                 title="DevEx y Modernización"
                 points={[
                   "Golden paths y portales de dev",
-                  "CI/CD con calidad y seguridad",
+                  <span key="p5"><GlossaryLink termKey="ci-cd">CI/CD</GlossaryLink> con calidad y seguridad</span> as unknown as string,
                   "Arquitectura modular",
                 ]}
                 outcome="Cycle time menor y menos incidentes."
@@ -178,6 +179,31 @@ export default function Page() {
                 list={["SLOs por servicio", "Runbooks y on-call", "Reportes mensuales de KPIs"]}
               />
             </div>
+          </div>
+        </section>
+
+        {/* Galería de medios: imágenes y videos */}
+        <section className="border-t">
+          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
+            <div className="flex items-center justify-between gap-3 flex-wrap mb-6">
+              <div>
+                <h2 className="text-3xl font-semibold">Ver para creer</h2>
+                <p className="text-slate-600">Demos cortas y vistas reales de nuestras plataformas y operaciones.</p>
+              </div>
+              <Button asChild variant="outline">
+                <Link href="/products">Explorar productos</Link>
+              </Button>
+            </div>
+            <MediaGallery
+              items={[
+                { type: "video", src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", poster: "/ia-agents-demo.png", alt: "Demo de agentes de IA" },
+                { type: "image", src: "/observabilidad-operaciones.png", alt: "Centro de operaciones con observabilidad" },
+                { type: "video", src: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4", poster: "/industrial-drone-demonstration.png", alt: "Inspección con drones" },
+                { type: "image", src: "/cloud-platform-architecture.png", alt: "Arquitectura de plataformas cloud" },
+                { type: "image", src: "/engineering-sprint-review.png", alt: "Equipo de ingeniería en sprint review" },
+                { type: "video", src: "https://media.w3.org/2010/05/bunny/trailer.mp4", poster: "/contact-center-ai-orchestration.png", alt: "Orquestación en contact center" },
+              ]}
+            />
           </div>
         </section>
 
@@ -223,7 +249,7 @@ export default function Page() {
               <div className="md:col-span-3">
                 <h2 className="text-3xl md:text-4xl font-semibold">Llevemos tus KPIs a otro nivel</h2>
                 <p className="mt-3 text-slate-300">
-                  Conversemos de objetivos, SLAs y plazos. Prepararemos una ruta de valor a 90 días.
+                  Conversemos de objetivos, <GlossaryLink termKey="sla">SLAs</GlossaryLink> y plazos. Prepararemos una ruta de valor a 90 días.
                 </p>
               </div>
               <div className="md:col-span-2 flex gap-3 md:justify-end">
@@ -259,7 +285,7 @@ function ServiceCard({
 }: {
   icon: React.ReactNode
   title: string
-  points: string[]
+  points: (string | React.ReactNode)[]
   outcome: string
 }) {
   return (
@@ -270,7 +296,7 @@ function ServiceCard({
       </CardHeader>
       <CardContent className="text-sm text-slate-600">
         <ul className="list-disc pl-5 space-y-1">
-          {points.map((p) => (<li key={p}>{p}</li>))}
+          {points.map((p, idx) => (<li key={idx}>{p}</li>))}
         </ul>
         <div className="mt-3 text-slate-700"><strong>Resultado: </strong>{outcome}</div>
       </CardContent>

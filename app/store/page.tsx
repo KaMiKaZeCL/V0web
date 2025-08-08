@@ -28,6 +28,7 @@ export default function StorePage() {
         <div className="mb-6">
           <Badge variant="secondary" className="rounded-full">Tienda</Badge>
           <h1 className="text-3xl md:text-4xl font-semibold mt-3">Compra directa</h1>
+          <p className="text-slate-600 mt-2">Servidores, workstations, laptops/notebooks, tablets, pantallas, impresoras, data center, partes y piezas, y más.</p>
         </div>
         <div className="flex flex-col md:flex-row items-stretch gap-3 mb-6">
           <Input placeholder="Buscar en la tienda..." value={q} onChange={(e) => setQ(e.target.value)} />
@@ -47,7 +48,7 @@ export default function StorePage() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <ProductCard key={p.id} product={p as any} />
           ))}
         </div>
 

@@ -170,70 +170,47 @@ export const productHighlights = [
 
 export const allProducts = [
   ...productHighlights,
-  {
-    id: "p4",
-    name: "SD-Cloud Fabric",
-    category: "Nube",
-    description: "Plataforma multi-cloud con FinOps y governance integrada.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
-  {
-    id: "p5",
-    name: "SD-Vision Kit",
-    category: "IA",
-    description: "Kit de visión computacional para inspección y seguridad.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
-  {
-    id: "p6",
-    name: "SD-Data Lake",
-    category: "Datos",
-    description: "Lago de datos gobernado con motores de consulta elásticos.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
-  {
-    id: "p7",
-    name: "SD-Contact AI",
-    category: "CX",
-    description: "Bots de atención, voz y análisis de conversaciones.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
-  {
-    id: "p8",
-    name: "SD-Dev Portal",
-    category: "DevEx",
-    description: "Portal de desarrolladores con golden paths y catálogos.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
-  {
-    id: "p9",
-    name: "SD-Edge Mesh",
-    category: "Redes",
-    description: "Conectividad SASE/SD-WAN optimizada para sitios remotos.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
-  {
-    id: "p10",
-    name: "SD-Identity Shield",
-    category: "Seguridad",
-    description: "Gestión de identidades, MFA y protección de privacidad.",
-    image: "/placeholder.svg?height=500&width=900",
-  },
+  { id: "p4", name: "Servidor Rack 2U High‑Perf", category: "Servidores", description: "Dual CPU, 512GB RAM, NVMe, redundancia eléctrica.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p5", name: "Workstation Pro RTX", category: "Workstations", description: "GPU RTX, 128GB RAM, ideal para IA y renderizado.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p6", name: "Laptop 14” Ultraliviana", category: "Laptops", description: "Intel Evo, 16GB RAM, 1TB SSD, batería de larga duración.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p7", name: "Notebook 15” Empresarial", category: "Notebooks", description: "AMD/Intel, 32GB RAM, seguridad empresarial.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p8", name: "Tablet Rugerizada 10”", category: "Tablets", description: "Resistente a golpes, IP68, ideal para terreno.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p9", name: "Pantalla 34” Ultrawide", category: "Pantallas", description: "IPS 34”, 3440×1440, USB‑C y KVM integrado.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p10", name: "Impresora Láser A4 Dúplex", category: "Impresoras", description: "Dúplex automático, red gigabit, alto rendimiento.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p11", name: "Pods de Data Center", category: "Data Center", description: "Racks, enfriamiento, UPS y monitoreo integrado.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p12", name: "Partes y Piezas", category: "Partes y Piezas", description: "Memoria, SSD, fuentes, ventiladores, cables.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p13", name: "Tecnología Variada", category: "Tecnología", description: "Accesorios, periféricos, docking, hubs, etc.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p14", name: "SD-Cloud Fabric", category: "Nube", description: "Plataforma multi-cloud con FinOps y governance integrada.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p15", name: "SD-Vision Kit", category: "IA", description: "Kit de visión computacional para inspección y seguridad.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p16", name: "SD-Data Lake", category: "Datos", description: "Lago de datos gobernado con motores de consulta elásticos.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p17", name: "SD-Contact AI", category: "CX", description: "Bots de atención, voz y análisis de conversaciones.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p18", name: "SD-Dev Portal", category: "DevEx", description: "Portal de desarrolladores con golden paths y catálogos.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p19", name: "SD-Edge Mesh", category: "Redes", description: "Conectividad SASE/SD-WAN optimizada para sitios remotos.", image: "/placeholder.svg?height=500&width=900" },
+  { id: "p20", name: "SD-Identity Shield", category: "Seguridad", description: "Gestión de identidades, MFA y protección de privacidad.", image: "/placeholder.svg?height=500&width=900" },
 ]
 
 export const allStoreProducts = [
-  { id: "s1", name: "SD-DroneX Pro", description: "Inspección industrial autónoma.", price: 3999000, category: "Drones", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s2", name: "SD-DroneX Lite", description: "Inspecciones ágiles.", price: 1899000, category: "Drones", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s3", name: "SD-IoT Edge Hub", description: "Gateway 5G con Edge AI.", price: 1299000, category: "IoT", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s4", name: "Sensor LoRa Temp/Hum", description: "Sensor industrial LoRaWAN.", price: 149000, category: "IoT", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s5", name: "SD-Agent Platform", description: "Plataforma agentes IA.", price: 599000, category: "Software", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s6", name: "SD-Cloud Fabric", description: "Multi-cloud + FinOps.", price: 899000, category: "Software", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s7", name: "SD-Vision Kit", description: "CV kit industrial.", price: 299000, category: "IA", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s8", name: "SD-Identity Shield", description: "IAM + MFA.", price: 399000, category: "Seguridad", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s9", name: "SD-Contact AI", description: "Voice bots + análisis.", price: 349000, category: "CX", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s10", name: "SD-Dev Portal", description: "DevEx superior.", price: 229000, category: "DevEx", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s11", name: "SD-Edge Mesh CPE", description: "CPE SASE/SD-WAN.", price: 499000, category: "Redes", image: "/placeholder.svg?height=500&width=900" },
-  { id: "s12", name: "SD-Data Lake License", description: "Lago de datos.", price: 799000, category: "Datos", image: "/placeholder.svg?height=500&width=900" },
+  // Hardware de computación
+  { id: "s1", name: "Servidor Rack 2U High‑Perf", description: "Dual CPU, 512GB RAM, NVMe, redundancia.", price: 6599900, category: "Servidores", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s2", name: "Servidor Torre SMB", description: "Ideal para pymes, silencioso y eficiente.", price: 2199900, category: "Servidores", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s3", name: "Workstation Pro RTX", description: "RTX 6000, 128GB RAM, NVMe.", price: 5499900, category: "Workstations", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s4", name: "Laptop 14” Ultraliviana", description: "Intel Evo, 16GB RAM, 1TB SSD.", price: 1299990, category: "Laptops", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s5", name: "Notebook 15” Empresarial", description: "32GB RAM, seguridad empresarial.", price: 999990, category: "Notebooks", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s6", name: "Tablet Rugerizada 10”", description: "IP68, para terreno.", price: 799990, category: "Tablets", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s7", name: "Pantalla 34” Ultrawide", description: "IPS, USB‑C, KVM.", price: 599990, category: "Pantallas", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s8", name: "Impresora Láser A4 Dúplex", description: "Dúplex, red gigabit.", price: 349990, category: "Impresoras", image: "/placeholder.svg?height=500&width=900" },
+  // Data Center y redes
+  { id: "s9", name: "Pod Data Center Modular", description: "Racks + enfriamiento + UPS.", price: 25999990, category: "Data Center", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s10", name: "CPE SD‑WAN", description: "Conectividad SASE/SD‑WAN.", price: 499000, category: "Redes", image: "/placeholder.svg?height=500&width=900" },
+  // Partes y piezas
+  { id: "s11", name: "SSD NVMe 2TB", description: "PCIe 4.0, alta performance.", price: 199990, category: "Partes y Piezas", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s12", name: "Memoria RAM 32GB", description: "DDR5, 5600 MHz.", price: 129990, category: "Partes y Piezas", image: "/placeholder.svg?height=500&width=900" },
+  // Software y plataformas
+  { id: "s13", name: "SD-Agent Platform", description: "Plataforma agentes IA.", price: 599000, category: "Software", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s14", name: "SD-Cloud Fabric", description: "Multi-cloud + FinOps.", price: 899000, category: "Software", image: "/placeholder.svg?height=500&width=900" },
+  // Existentes para compatibilidad
+  { id: "s15", name: "Sensor LoRa Temp/Hum", description: "Sensor industrial LoRaWAN.", price: 149000, category: "IoT", image: "/placeholder.svg?height=500&width=900" },
+  { id: "s16", name: "SD-Edge Mesh CPE", description: "CPE SASE/SD-WAN.", price: 499000, category: "Redes", image: "/placeholder.svg?height=500&width=900" },
 ]
 
 export const leaders: Leader[] = [
