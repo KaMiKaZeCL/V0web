@@ -2,19 +2,20 @@ import Link from "next/link"
 import { Container, Row, Col, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLinkedin, faXTwitter } from "@fortawesome/free-brands-svg-icons"
+import Image from "next/image"
 
 export default function SiteFooter() {
   return (
     <footer className="footer-dark mt-5 pt-5">
       <Container fluid="xl">
         <Row className="g-4">
-          <Col md={5}>
+          <Col md={5} className="position-relative">
             <div className="d-flex align-items-center gap-2 mb-2">
-              <span className="d-inline-block rounded-circle" style={{ width: 28, height: 28, background: "linear-gradient(135deg, var(--sd-primary), var(--sd-accent))" }} aria-hidden />
+              <Image src="/images/south-developers-logo.png" alt="South Developers Chile SpA" width={28} height={28} />
               <div className="fw-semibold">South Developers Chile SpA</div>
             </div>
-            <p className="mb-3" style={{ maxWidth: 520 }}>
-              Soluciones en IA, nube, ciberseguridad, IoT, drones y software a la medida. Operamos con SLAs exigentes y KPIs visibles.
+            <p className="mb-3" style={{ maxWidth: 560 }}>
+              Soluciones en IA, nube, ciberseguridad, IoT, drones y software a la medida. Operamos con SLAs exigentes y KPIs visibles para tu negocio.
             </p>
             <div className="d-flex gap-3">
               <OverlayTrigger placement="top" overlay={<Tooltip id="tip-ln">LinkedIn</Tooltip>}>
@@ -28,6 +29,7 @@ export default function SiteFooter() {
                 </a>
               </OverlayTrigger>
             </div>
+            <Image src="/images/south-developers-logo.png" alt="" width={320} height={200} className="watermark d-none d-md-block" />
           </Col>
           <Col md={2}>
             <div className="fw-semibold">Empresa</div>
@@ -55,7 +57,7 @@ export default function SiteFooter() {
         </Row>
         <div className="footer-divider mt-4 pt-3 pb-4 small d-flex justify-content-between flex-wrap gap-2">
           <div>© {new Date().getFullYear()} South Developers Chile SpA</div>
-          <div className="opacity-75">Hecho con foco en resultados medibles.</div>
+          <div className="opacity-100">Tecnología con impacto medible y seguridad por diseño.</div>
         </div>
       </Container>
     </footer>
