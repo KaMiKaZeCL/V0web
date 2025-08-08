@@ -1,4 +1,8 @@
 /* Brand system: modern, clean, commercial */
+
+/* Fix horizontal overflow (eliminates empty space on the right) */
+html, body { overflow-x: hidden; }
+
 /* Bootstrap 5.3 variable overrides (runtime-safe) */
 :root {
   /* Brand palette */
@@ -34,7 +38,7 @@
 /* Smooth typography rendering */
 html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-/* Navbar: glass + elevate on scroll */
+/* Navbar: glass + elevate on scroll with strong contrast */
 .navbar-blur {
   background: color-mix(in oklab, white 70%, transparent);
   backdrop-filter: saturate(120%) blur(10px);
@@ -46,6 +50,15 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   background: color-mix(in oklab, white 88%, transparent);
   box-shadow: 0 6px 30px -12px rgba(2,12,27,.12);
   border-bottom-color: color-mix(in oklab, var(--sd-border) 95%, transparent);
+}
+.navbar-blur .navbar-brand, 
+.navbar-blur .nav-link, 
+.navbar-blur .navbar-text {
+  color: var(--sd-ink) !important;
+}
+.navbar-blur .nav-link.active {
+  color: var(--sd-primary) !important;
+  font-weight: 600;
 }
 
 /* Sections */
@@ -72,6 +85,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   filter: blur(40px);
   opacity: .35;
   animation: aurora-move 22s linear infinite alternate;
+  pointer-events: none;
 }
 @keyframes aurora-move {
   0% { transform: translate3d(0,0,0) rotate(0deg);}
@@ -84,6 +98,19 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Links: replace default blue with elegant underlines (not for .btn/.nav-link) */
+a:not(.btn):not(.nav-link):not(.dropdown-item):not(.list-group-item) {
+  color: var(--sd-ink);
+  text-decoration-color: color-mix(in oklab, var(--sd-primary) 35%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color .15s ease, text-decoration-color .15s ease;
+}
+a:not(.btn):not(.nav-link):hover {
+  color: var(--sd-primary);
+  text-decoration-color: var(--sd-primary);
 }
 
 /* Soft badge */
@@ -121,9 +148,7 @@ html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; 
 .icon-li .icon { margin-top: .2rem; }
 
 /* Logo marquee polish */
-.marquee-wrap {
-  position: relative; overflow: hidden; width: 100%;
-}
+.marquee-wrap { position: relative; overflow: hidden; width: 100%; }
 .marquee-fade-l, .marquee-fade-r {
   position: absolute; top: 0; bottom: 0; width: 80px; pointer-events: none;
 }

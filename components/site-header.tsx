@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Navbar, Container, Nav, Button } from "react-bootstrap"
+import { Navbar, Container, Nav, Button, Offcanvas } from "react-bootstrap"
 import { useEffect, useState } from "react"
 import { ShoppingCart } from 'lucide-react'
 import { useCart } from "./cart-provider"
@@ -21,6 +21,7 @@ export default function SiteHeader() {
   const pathname = usePathname()
   const { openCart } = useCart()
   const [scrolled, setScrolled] = useState(false)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -31,14 +32,32 @@ export default function SiteHeader() {
 
   return (
     <>
-      <Navbar expand="md" fixed="top" className={`navbar-blur ${scrolled ? "scrolled" : ""}`}>
+      <Navbar expand="lg" fixed="top" className={`navbar-blur ${scrolled ? "scrolled" : ""}`}>
         <Container fluid="xl">
           <Navbar.Brand as={Link} href="/" className="d-flex align-items-center gap-2">
             <span className="d-inline-block rounded-circle" style={{ width: 30, height: 30, background: "linear-gradient(135deg, var(--sd-primary), var(--sd-accent))" }} aria-hidden />
             <span className="fw-semibold">South Developers</span>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="primary-nav" />
-          <Navbar.Collapse id="primary-nav">
+
+          {/* Desktop actions */}
+          <div className="order-lg-3 d-none d-lg-flex align-items-center gap-2">
+            <Button as={Link} href="/contact" variant="outline-secondary">Solicitar demo</Button>
+            <Button variant="primary" onClick={openCart} aria-label="Abrir carrito" className="d-inline-flex align-items-center gap-1">
+              <ShoppingCart size={18} />
+              <span className="d-none d-xl-inline">Carrito</span>
+            </Button>
+          </div>
+
+          {/* Mobile toggles */}
+          <div className="ms-auto order-lg-2 d-flex d-lg-none align-items-center gap-2">
+            <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
+              <ShoppingCart size={18} />
+            </Button>
+            <Navbar.Toggle aria-controls="primary-offcanvas" onClick={() => setShow(true)} />
+          </div>
+
+          {/* Desktop nav */}
+          <Navbar.Collapse id="primary-nav" className="order-lg-1">
             <Nav className="ms-2">
               {nav.map((item) => (
                 <Nav.Link
@@ -52,18 +71,37 @@ export default function SiteHeader() {
                 </Nav.Link>
               ))}
             </Nav>
-            <div className="ms-auto d-flex align-items-center gap-2">
-              <Button as={Link} href="/contact" variant="outline-secondary" className="d-none d-md-inline-flex">
-                Solicitar demo
-              </Button>
-              <Button variant="primary" onClick={openCart} aria-label="Abrir carrito" className="d-inline-flex align-items-center gap-1">
-                <ShoppingCart size={18} />
-                <span className="d-none d-sm-inline">Carrito</span>
-              </Button>
-            </div>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      {/* Mobile Offcanvas menu */}
+      <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menú</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Nav className="flex-column">
+            {nav.map((item) => (
+              <Nav.Link
+                as={Link}
+                href={item.href}
+                key={item.href}
+                active={pathname === item.href}
+                onClick={() => setShow(false)}
+                className="py-2"
+              >
+                {item.label}
+              </Nav.Link>
+            ))}
+            <hr />
+            <Button as={Link} href="/contact" variant="primary" className="w-100" onClick={() => setShow(false)}>
+              Solicitar demo
+            </Button>
+          </Nav>
+        </Offcanvas.Body>
+      </Offcanvas>
+
       <CartSheet />
       <div style={{ height: 72 }} aria-hidden /> {/* spacer for fixed navbar */}
     </>

@@ -14,10 +14,25 @@ export default function Page() {
     <div>
       <SiteHeader />
       <main>
-        {/* Hero */}
-        <section className="section position-relative">
-          <div className="aurora" aria-hidden />
-          <Container fluid="xl">
+        {/* Hero with background video */}
+        <section className="section position-relative overflow-hidden">
+          <div className="position-absolute top-0 start-0 w-100 h-100" style={{ zIndex: 0, pointerEvents: "none" }} aria-hidden>
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              poster="/futuristic-tech-landscape-4k.png"
+              className="position-absolute top-0 start-0 w-100 h-100"
+              style={{ objectFit: "cover", opacity: .28 }}
+            >
+              <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4" />
+            </video>
+            <div className="aurora" />
+          </div>
+
+          <Container fluid="xl" style={{ position: "relative", zIndex: 1 }}>
             <Row className="align-items-center gy-4">
               <Col md={7}>
                 <span className="badge badge-soft rounded-pill">Consultoría + Ingeniería + Operaciones</span>
