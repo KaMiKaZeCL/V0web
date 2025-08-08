@@ -6,7 +6,6 @@ type Logo = { name: string; logo: string }
 
 export default function LogoWall({ items = [] as Logo[] }) {
   const list = items.length ? items : [{ name: "South Developers", logo: "/images/south-developers-logo.png" }]
-
   return (
     <div className="logo-wall">
       {list.map((c, i) => (
@@ -14,9 +13,9 @@ export default function LogoWall({ items = [] as Logo[] }) {
           <Image
             src={c.logo || "/placeholder.svg?height=100&width=220&query=logo"}
             alt={`${c.name} logo`}
-            width={200}
-            height={56}
-            style={{ objectFit: "contain", maxWidth: "84%", height: "56px" }}
+            width={220}
+            height={80}
+            style={{ objectFit: "contain", maxWidth: "88%", height: "64px" }}
           />
         </div>
       ))}

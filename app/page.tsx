@@ -8,31 +8,16 @@ import Link from "next/link"
 import Image from "next/image"
 import { Container, Row, Col, Button, Card, Badge, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShieldHalved, faGaugeHigh, faRobot, faCloud, faIndustry, faScrewdriverWrench, faCircleInfo, faBolt } from "@fortawesome/free-solid-svg-icons"
+import { faShieldHalved, faGaugeHigh, faRobot, faCloud, faIndustry, faScrewdriverWrench, faBolt } from "@fortawesome/free-solid-svg-icons"
 
 export default function Page() {
   return (
     <div>
       <SiteHeader />
       <main>
-        {/* Hero with background video + logo watermark */}
+        {/* Hero: credible image + aurora, no fantasy background video */}
         <section className="section position-relative overflow-hidden">
-          <div className="position-absolute top-0 start-0 w-100 h-100" style={{ zIndex: 0, pointerEvents: "none" }} aria-hidden>
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              poster="/futuristic-tech-landscape-4k.png"
-              className="position-absolute top-0 start-0 w-100 h-100"
-              style={{ objectFit: "cover", opacity: .28 }}
-            >
-              <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4" />
-            </video>
-            <div className="aurora" />
-          </div>
-
+          <div className="aurora" aria-hidden />
           <Container fluid="xl" style={{ position: "relative", zIndex: 1 }}>
             <Row className="align-items-center gy-4">
               <Col md={7} className="position-relative">
@@ -63,7 +48,7 @@ export default function Page() {
               </Col>
               <Col md={5}>
                 <div className="ratio ratio-16x9 rounded-xl border overflow-hidden shadow-soft bg-grid">
-                  <Image src="/futuristic-tech-landscape-4k.png" alt="Fondo tecnológico" fill style={{ objectFit: "cover" }} />
+                  <Image src="/observabilidad-operaciones.png" alt="Centro de operaciones con observabilidad" fill style={{ objectFit: "cover" }} />
                 </div>
               </Col>
             </Row>
@@ -78,7 +63,7 @@ export default function Page() {
           </Container>
         </section>
 
-        {/* Propuesta de valor con tooltips */}
+        {/* Propuesta de valor */}
         <section className="section section-light section-divider">
           <Container fluid="xl">
             <Row className="gy-4">
@@ -131,7 +116,7 @@ export default function Page() {
           </Container>
         </section>
 
-        {/* Servicios con FA */}
+        {/* Servicios */}
         <section className="section section-divider">
           <Container fluid="xl">
             <div className="d-flex flex-wrap justify-content-between align-items-center gap-2">
@@ -177,7 +162,6 @@ export default function Page() {
             </div>
             <MediaGallery
               items={[
-                { type: "video", src: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4", poster: "/ia-agents-demo.png", alt: "Demo de agentes de IA" },
                 { type: "image", src: "/observabilidad-operaciones.png", alt: "Centro de operaciones con observabilidad" },
                 { type: "video", src: "https://media.w3.org/2010/05/sintel/trailer_hd.mp4", poster: "/industrial-drone-demonstration.png", alt: "Inspección con drones" },
                 { type: "image", src: "/cloud-platform-architecture.png", alt: "Arquitectura de plataformas cloud" },

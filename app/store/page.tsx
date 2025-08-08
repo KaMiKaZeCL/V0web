@@ -3,10 +3,12 @@
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
 import { useMemo, useState } from "react"
-import { Container, Row, Col, Form, Button } from "react-bootstrap"
+import { Container, Row, Col, Form, Button, OverlayTrigger, Tooltip } from "react-bootstrap"
 import { allStoreProducts } from "@/lib/data"
 import ProductCard from "@/components/product-card"
 import { useCart } from "@/components/cart-provider"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
 
 export default function StorePage() {
   const [q, setQ] = useState("")
@@ -28,7 +30,7 @@ export default function StorePage() {
           <Container fluid="xl">
             <span className="badge badge-soft rounded-pill">Tienda</span>
             <h1 className="h2 fw-semibold mt-2 text-gradient">Compra directa</h1>
-            <p className="text-muted">Servidores, workstations, laptops/notebooks, tablets, pantallas, impresoras, data center, partes y piezas, y más.</p>
+            <p className="text-muted">Servidores, workstations, laptops/notebooks, tablets, pantallas, impresoras, data center, partes y piezas y más.</p>
 
             <Row className="g-2 align-items-stretch mb-3">
               <Col md={6}>
@@ -57,7 +59,12 @@ export default function StorePage() {
             </Row>
 
             <div className="d-flex justify-content-center mt-3">
-              <Button onClick={openCart} className="btn-cta px-4">Ver Carrito</Button>
+              <OverlayTrigger placement="top" overlay={<Tooltip id="tip-view-cart">Ver carrito</Tooltip>}>
+                <Button onClick={openCart} className="btn-cta px-4 d-inline-flex align-items-center gap-2">
+                  <FontAwesomeIcon icon={faCartShopping} />
+                  Ver Carrito
+                </Button>
+              </OverlayTrigger>
             </div>
           </Container>
         </section>

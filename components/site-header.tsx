@@ -33,7 +33,7 @@ export default function SiteHeader() {
 
   return (
     <>
-      <Navbar expand="lg" fixed="top" className={`navbar-blur ${scrolled ? "scrolled" : ""}`}>
+      <Navbar expand="lg" fixed="top" className={`navbar-blur shadow-sm ${scrolled ? "scrolled" : ""}`}>
         <Container fluid="xl">
           <Navbar.Brand as={Link} href="/" className="d-flex align-items-center gap-2">
             <Image src="/images/south-developers-logo.png" alt="South Developers Chile SpA" width={34} height={34} />
@@ -66,7 +66,7 @@ export default function SiteHeader() {
             </Navbar.Toggle>
           </div>
 
-          {/* Desktop nav */}
+          {/* Desktop nav (always visible on lg+) */}
           <Navbar.Collapse id="primary-nav" className="order-lg-1">
             <Nav className="ms-2">
               <Nav.Link as={Link} href="/" active={pathname === "/"} className="px-2">Inicio</Nav.Link>
