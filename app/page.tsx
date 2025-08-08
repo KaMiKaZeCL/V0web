@@ -1,275 +1,338 @@
 import Link from "next/link"
+import Image from "next/image"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, CheckCircle2, Cpu, DrillIcon as Drone, Bot, ShieldHalf, Cloud, Network, Building2 } from 'lucide-react'
+import { CheckCircle2, GaugeCircle, ShieldCheck, Zap, Bot, Cloud, Factory, Wrench, BarChart3 } from 'lucide-react'
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import HeroVideo from "@/components/hero-video"
-import { servicesCatalog, productHighlights, clients } from "@/lib/data"
-import Image from "next/image"
+import AuroraHero from "@/components/aurora-hero"
+import MarqueeLogos from "@/components/marquee-logos"
+import { clients } from "@/lib/data"
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <SiteHeader />
       <main className="flex flex-col">
-        <section className="relative overflow-hidden">
-          <HeroVideo />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/40 to-background pointer-events-none" />
-          <div className="relative z-10 container max-w-6xl mx-auto px-4 py-16 md:py-24">
-            <div className="max-w-3xl">
-              <Badge className="bg-emerald-600 hover:bg-emerald-600 text-white rounded-full">South Developers Chile SpA</Badge>
-              <h1 className="mt-4 text-4xl md:text-6xl font-semibold tracking-tight">
-                Soluciones tecnológicas integrales para un mundo hiperconectado
-              </h1>
-              <p className="mt-4 text-muted-foreground text-lg md:text-xl">
-                Diseñamos, construimos y operamos plataformas, productos y servicios de clase mundial: desde IoT y drones de inspección, 
-                hasta agentes de IA, ciberseguridad, nubes híbridas y software a la medida. Superior, radical y confiable.
-              </p>
-              <div className="mt-6 flex flex-col sm:flex-row gap-3">
-                <Link href="/contact">
-                  <Button size="lg" className="h-11 px-6 bg-emerald-600 hover:bg-emerald-700">
-                    Hablemos de tu proyecto <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button size="lg" variant="outline" className="h-11 px-6">
-                    Ver Servicios
-                  </Button>
-                </Link>
-                <Link href="/store">
-                  <Button size="lg" variant="ghost" className="h-11 px-6">
-                    Tienda
-                  </Button>
-                </Link>
-              </div>
-              <div className="mt-6 flex flex-wrap gap-3 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600" /> ISO/IEC 27001 Ready</div>
-                <div className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600" /> SLAs Misión Crítica</div>
-                <div className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Cobertura LATAM/Global</div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Hero diferenciador */}
+        <AuroraHero
+          eyebrow="Consultoría + Ingeniería + Operaciones"
+          title="Diseñamos, construimos y operamos para producción"
+          subtitle="Transformamos objetivos de negocio en plataformas y servicios confiables. Agentes de IA, nubes híbridas, ciberseguridad, IoT y software a la medida, con métricas claras, SLAs exigentes y foco en valor."
+          primaryCta={{ href: "/contact", label: "Agenda una reunión" }}
+          secondaryCta={{ href: "/services", label: "Ver cómo trabajamos" }}
+        />
 
+        {/* Logos en marquee */}
         <section className="border-t">
-          <div className="container max-w-6xl mx-auto px-4 py-10 md:py-16">
-            <div className="text-center space-y-2 mb-8">
-              <h2 className="text-2xl md:text-3xl font-semibold">Confían en nosotros</h2>
-              <p className="text-muted-foreground">Empresas líderes y organizaciones visionarias</p>
+          <div className="container max-w-6xl mx-auto px-4 py-8 md:py-12">
+            <div className="text-center space-y-2 mb-6">
+              <p className="text-sm text-slate-500">Equipos que confían en abordajes modernos y medibles</p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
-              {clients.map((c) => (
-                <div key={c.name} className="flex items-center justify-center opacity-80 hover:opacity-100 transition">
-                  <Image
-                    src={c.logo || "/placeholder.svg"}
-                    alt={c.name + " logo"}
-                    width={140}
-                    height={70}
-                    className="object-contain"
-                  />
-                </div>
-              ))}
-            </div>
+            <MarqueeLogos items={clients as any} />
           </div>
         </section>
 
-        <section className="border-t bg-muted/40">
+        {/* Propuesta de valor con foco en resultados */}
+        <section className="border-t bg-slate-50">
           <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="grid md:grid-cols-2 gap-10 items-center">
-              <div>
-                <Badge variant="secondary" className="rounded-full">Misión, Visión y Objetivos</Badge>
-                <h2 className="mt-3 text-3xl md:text-4xl font-semibold">Excelencia, impacto y confianza</h2>
-                <p className="mt-4 text-muted-foreground">
-                  Nuestra misión es potenciar organizaciones con tecnología superior y diseño impecable. 
-                  Nuestra visión: ser el partner estratégico más confiable de LATAM, liderando la evolución hacia plataformas 
-                  autónomas, resilientes y sostenibles. Objetivos: entregar resultados medibles, acelerar innovación, y 
-                  garantizar seguridad y continuidad de negocio de extremo a extremo.
+            <div className="grid md:grid-cols-12 gap-10 items-start">
+              <div className="md:col-span-6">
+                <Badge variant="secondary" className="rounded-full">Propuesta de valor</Badge>
+                <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
+                  Tecnología que impacta KPIs del negocio
+                </h2>
+                <p className="mt-4 text-slate-600 text-lg">
+                  Combinamos estrategia, arquitectura y entrega continua para acelerar el time‑to‑value. Operamos con
+                  OKRs y KPIs visibles —desde uptime y seguridad, hasta lead time de cambios— y asumimos SLAs que
+                  responden a la criticidad de tu operación.
                 </p>
-                <ul className="mt-6 space-y-3 text-sm">
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Time-to-Value acelerado con marcos ágiles y AI-first</li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Zero Trust, observabilidad total y cumplimiento</li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Innovación responsable y sostenible</li>
+                <ul className="mt-6 space-y-3 text-sm text-slate-700">
+                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Enfoque AI‑first y plataformas componibles</li>
+                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Seguridad por diseño y observabilidad e2e</li>
+                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Operación SRE con compromisos explícitos</li>
                 </ul>
+                <div className="mt-6 flex gap-3">
+                  <Button asChild className="bg-emerald-600 hover:bg-emerald-700">
+                    <Link href="/contact">Conversemos</Link>
+                  </Button>
+                  <Button asChild variant="outline">
+                    <Link href="/about">Quiénes somos</Link>
+                  </Button>
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <Image
-                  src={"/placeholder.svg?height=400&width=600&query=equipo%20de%20ingenieria%20de%20software%20en%20sala%20moderna"}
-                  alt="Equipo de ingeniería colaborando"
-                  width={600}
-                  height={400}
-                  className="rounded-xl border bg-background object-cover"
-                />
-                <Image
-                  src={"/placeholder.svg?height=400&width=600&query=centro%20de%20datos%20y%20nube%20hibrida%20infraestructura"}
-                  alt="Infraestructura de nube y data center"
-                  width={600}
-                  height={400}
-                  className="rounded-xl border bg-background object-cover"
-                />
+              <div className="md:col-span-6">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <Card className="border-emerald-100">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center gap-2 text-lg"><GaugeCircle className="w-5 h-5 text-emerald-600" /> KPIs operacionales</CardTitle>
+                      <CardDescription>Compromisos visibles y auditables</CardDescription>
+                    </CardHeader>
+                    <CardContent className="grid grid-cols-2 gap-3 text-sm">
+                      <div><div className="text-2xl font-semibold">99,95%</div><div className="text-slate-500">Uptime</div></div>
+                      <div><div className="text-2xl font-semibold">{'< 24h'}</div><div className="text-slate-500">Lead time cambios</div></div>
+                      <div><div className="text-2xl font-semibold">{'< 60m'}</div><div className="text-slate-500">MTTR</div></div>
+                      <div><div className="text-2xl font-semibold">{'> 70'}</div><div className="text-slate-500">NPS</div></div>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center gap-2 text-lg"><ShieldCheck className="w-5 h-5 text-violet-600" /> Seguridad y cumplimiento</CardTitle>
+                      <CardDescription>Zero Trust, IAM y hardening</CardDescription>
+                    </CardHeader>
+                    <CardContent className="text-sm text-slate-600">
+                      Gestión de identidades, MFA, segmentación, escaneo continuo (SAST/DAST), política de parches y
+                      respuesta a incidentes con runbooks. Alineados a ISO/IEC 27001 y NIST.
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Servicios → Resultados */}
         <section className="border-t">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="flex items-center gap-3 mb-6">
-              <Badge className="rounded-full bg-violet-600 hover:bg-violet-600">Servicios estrella</Badge>
-              <div className="text-muted-foreground text-sm">Un universo de capacidades</div>
-            </div>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="hover:shadow-lg transition">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Bot className="w-5 h-5 text-violet-600" /> Agentes de IA y Automatización</CardTitle>
-                  <CardDescription>Agentes autónomos, copilotos y RPA inteligente</CardDescription>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Orquestación de agentes, integración con sistemas, guardrails, evaluación y observabilidad de LLMs.
-                </CardContent>
-              </Card>
-              <Card className="hover:shadow-lg transition">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Drone className="w-5 h-5 text-violet-600" /> Drones y Robótica</CardTitle>
-                  <CardDescription>Inspección, seguridad, logística y monitoreo</CardDescription>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Flotas, rutas, visión computacional, gemelos digitales y cumplimiento normativo.
-                </CardContent>
-              </Card>
-              <Card className="hover:shadow-lg transition">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2"><Cloud className="w-5 h-5 text-violet-600" /> Nube y Plataformas</CardTitle>
-                  <CardDescription>Multi-cloud, híbrida, FinOps y SRE</CardDescription>
-                </CardHeader>
-                <CardContent className="text-sm text-muted-foreground">
-                  Arquitecturas elásticas, plataformas internas de desarrollo (IDP), seguridad y observabilidad 24/7.
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-4 mt-6">
-              {servicesCatalog.slice(0, 8).map((s) => (
-                <Card key={s.name} className="hover:shadow transition">
-                  <CardHeader>
-                    <CardTitle className="text-base flex items-center gap-2">
-                      {s.icon}
-                      {s.name}
-                    </CardTitle>
-                    <CardDescription>{s.subtitle}</CardDescription>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Link href="/services">
-                <Button variant="outline" className="rounded-full">
-                  Ver catálogo completo de servicios
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-t bg-muted/40">
           <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
             <div className="flex items-center justify-between gap-3 flex-wrap">
               <div>
-                <h2 className="text-3xl font-semibold">Productos destacados</h2>
-                <p className="text-muted-foreground">Hardware, plataformas y software listos para producción</p>
+                <h2 className="text-3xl font-semibold">Servicios que se traducen en resultados</h2>
+                <p className="text-slate-600">De la estrategia a la operación continua, con métricas claras.</p>
               </div>
-              <Link href="/products">
-                <Button variant="ghost" className="gap-2">Explorar productos <ArrowRight className="w-4 h-4" /></Button>
-              </Link>
+              <Button asChild variant="ghost" className="gap-2">
+                <Link href="/services">Ver catálogo completo <ArrowIcon /></Link>
+              </Button>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-              {productHighlights.map((p) => (
-                <Card key={p.id} className="overflow-hidden hover:shadow-lg transition">
-                  <CardContent className="p-0">
-                    <Image
-                      src={p.image || "/placeholder.svg"}
-                      alt={p.name}
-                      width={800}
-                      height={500}
-                      className="w-full aspect-[16/9] object-cover"
-                    />
-                  </CardContent>
-                  <CardHeader>
-                    <div className="flex items-center justify-between gap-2">
-                      <CardTitle className="text-lg">{p.name}</CardTitle>
-                      <Badge variant="secondary">{p.category}</Badge>
-                    </div>
-                    <CardDescription>{p.description}</CardDescription>
-                  </CardHeader>
-                </Card>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Link href="/store">
-                <Button className="bg-emerald-600 hover:bg-emerald-700">Ir a la Tienda</Button>
-              </Link>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
+              <ServiceCard
+                icon={<Bot className="w-5 h-5 text-violet-600" />}
+                title="Agentes de IA"
+                points={[
+                  "RAG evaluado y trazable",
+                  "Orquestación con herramientas",
+                  "Guardrails y observabilidad LLM",
+                ]}
+                outcome="Aumento de autoservicio y reducción de tiempos de respuesta."
+              />
+              <ServiceCard
+                icon={<Cloud className="w-5 h-5 text-emerald-600" />}
+                title="Nube y Plataformas"
+                points={[
+                  "IDP, plataformas componibles",
+                  "FinOps y resiliencia",
+                  "SRE 24/7 y performance",
+                ]}
+                outcome="Ejecución consistente y costos bajo control."
+              />
+              <ServiceCard
+                icon={<Factory className="w-5 h-5 text-emerald-600" />}
+                title="IoT y Edge"
+                points={[
+                  "Redes 5G/LoRa y edge AI",
+                  "Telemetría y control en tiempo real",
+                  "Seguridad de dispositivos",
+                ]}
+                outcome="Visibilidad y acción inmediata en terreno."
+              />
+              <ServiceCard
+                icon={<Wrench className="w-5 h-5 text-violet-600" />}
+                title="DevEx y Modernización"
+                points={[
+                  "Golden paths y portales de dev",
+                  "CI/CD con calidad y seguridad",
+                  "Arquitectura modular",
+                ]}
+                outcome="Cycle time menor y menos incidentes."
+              />
             </div>
           </div>
         </section>
 
+        {/* Metodología, SLA y gobierno */}
+        <section className="border-t bg-slate-50">
+          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
+            <div className="text-center space-y-2">
+              <Badge className="rounded-full bg-emerald-600 hover:bg-emerald-600 text-white">Cómo trabajamos</Badge>
+              <h2 className="text-3xl md:text-4xl font-semibold">Metodología clara, SLAs exigentes y KPIs visibles</h2>
+              <p className="text-slate-600">Un marco que combina agilidad, gobierno y confiabilidad operacional.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 mt-8">
+              <MethodCard
+                icon={<BarChart3 className="w-5 h-5 text-emerald-600" />}
+                title="Descubrimiento y OKRs"
+                desc="Entendemos impacto, restricciones y casos de uso; definimos OKRs, KPIs y criterios de éxito."
+                list={["Mapa de valor", "KPIs/SLAs iniciales", "Roadmap priorizado"]}
+              />
+              <MethodCard
+                icon={<Zap className="w-5 h-5 text-violet-600" />}
+                title="Entrega continua"
+                desc="Sprints cortos, feedback semanal y demostraciones en entorno real desde temprano."
+                list={["Trunk-based + CI/CD", "Pruebas automatizadas", "Versionado y canary"]}
+              />
+              <MethodCard
+                icon={<ShieldCheck className="w-5 h-5 text-emerald-600" />}
+                title="Operación SRE"
+                desc="SLOs, observabilidad e incident response. Postmortems y mejora continua."
+                list={["SLOs por servicio", "Runbooks y on-call", "Reportes mensuales de KPIs"]}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Casos reales */}
         <section className="border-t">
           <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="flex items-center justify-between gap-3 flex-wrap">
               <div>
-                <h2 className="text-3xl font-semibold">¿Quiénes somos?</h2>
-                <p className="mt-4 text-muted-foreground">
-                  Somos ingenieras e ingenieros, científicas de datos, arquitectos cloud, especialistas en ciberseguridad, 
-                  pilotos de drones e investigadores en IA. Combinamos rigor técnico con diseño aplicado al negocio, para 
-                  resultados superiores y confiables.
-                </p>
-                <div className="mt-6 grid gap-4">
-                  <div className="flex items-center gap-3"><Cpu className="w-5 h-5 text-emerald-600" /> +250 especialistas certificados</div>
-                  <div className="flex items-center gap-3"><ShieldHalf className="w-5 h-5 text-emerald-600" /> Certificaciones de seguridad y compliance</div>
-                  <div className="flex items-center gap-3"><Network className="w-5 h-5 text-emerald-600" /> Partners multi-nube y ecosistema global</div>
-                  <div className="flex items-center gap-3"><Building2 className="w-5 h-5 text-emerald-600" /> Presencia en Chile y alcance internacional</div>
-                </div>
-                <div className="mt-6">
-                  <Link href="/about">
-                    <Button variant="outline">Conocer más</Button>
-                  </Link>
-                </div>
+                <h2 className="text-3xl font-semibold">Casos reales</h2>
+                <p className="text-slate-600">Historias breves con impacto medible.</p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <Image
-                  src={"/placeholder.svg?height=360&width=540&query=laboratorio%20robotica%20y%20vision%20computacional"}
-                  alt="Laboratorio de robótica y visión"
-                  width={540}
-                  height={360}
-                  className="rounded-xl border object-cover"
-                />
-                <Image
-                  src={"/placeholder.svg?height=360&width=540&query=equipo%20operaciones%20sre%20observabilidad%2024%2F7"}
-                  alt="Equipo de operaciones SRE 24/7"
-                  width={540}
-                  height={360}
-                  className="rounded-xl border object-cover"
-                />
-              </div>
+              <Button asChild variant="outline">
+                <Link href="/contact">Solicitar referentes</Link>
+              </Button>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              <CaseCard
+                image={"/digital-energy-operations-center.png"}
+                title="Operación digital en energía"
+                desc="SRE + observabilidad end‑to‑end para plataformas críticas."
+                highlights={["-50% MTTR", "+99,95% uptime", "Alertas con bajo ruido"]}
+              />
+              <CaseCard
+                image={"/contact-center-bots.png"}
+                title="Autoservicio con IA en CX"
+                desc="Bots multimodales y orquestación sobre datos privados."
+                highlights={["-35% AHT", "+42% resolución 1er contacto", "CX medible con QA de conversaciones"]}
+              />
+              <CaseCard
+                image={"/industrial-drone-inspection.png"}
+                title="Inspección con drones"
+                desc="Planificación de misiones y visión computacional en terreno."
+                highlights={["+3x velocidad de inspección", "-60% incidentes", "Trazabilidad normativa"]}
+              />
             </div>
           </div>
         </section>
 
-        <section className="border-t bg-muted/40">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="text-center space-y-2 mb-8">
-              <h2 className="text-3xl font-semibold">Inicia tu transformación hoy</h2>
-              <p className="text-muted-foreground">Cuéntanos tu desafío y diseñamos una ruta a producción</p>
-            </div>
-            <div className="flex justify-center">
-              <Link href="/contact">
-                <Button size="lg" className="bg-emerald-600 hover:bg-emerald-700">Contacto Comercial</Button>
-              </Link>
+        {/* CTA final */}
+        <section className="border-t bg-slate-900 text-white">
+          <div className="container max-w-6xl mx-auto px-4 py-14 md:py-20">
+            <div className="grid md:grid-cols-5 gap-8 items-center">
+              <div className="md:col-span-3">
+                <h2 className="text-3xl md:text-4xl font-semibold">Llevemos tus KPIs a otro nivel</h2>
+                <p className="mt-3 text-slate-300">
+                  Conversemos de objetivos, SLAs y plazos. Prepararemos una ruta de valor a 90 días.
+                </p>
+              </div>
+              <div className="md:col-span-2 flex gap-3 md:justify-end">
+                <Button asChild size="lg" className="h-11 px-6 bg-emerald-600 hover:bg-emerald-500 text-slate-900">
+                  <Link href="/contact">Agenda una reunión</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="h-11 px-6 border-slate-700 text-white hover:bg-white/10">
+                  <Link href="/services">Ver metodología</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </section>
       </main>
       <SiteFooter />
     </div>
+  )
+}
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="16" height="16" className="inline-block">
+      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
+function ServiceCard({
+  icon,
+  title,
+  points,
+  outcome,
+}: {
+  icon: React.ReactNode
+  title: string
+  points: string[]
+  outcome: string
+}) {
+  return (
+    <Card className="hover:shadow-lg transition">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-lg">{icon}{title}</CardTitle>
+        <CardDescription>De la estrategia a la operación</CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm text-slate-600">
+        <ul className="list-disc pl-5 space-y-1">
+          {points.map((p) => (<li key={p}>{p}</li>))}
+        </ul>
+        <div className="mt-3 text-slate-700"><strong>Resultado: </strong>{outcome}</div>
+      </CardContent>
+    </Card>
+  )
+}
+
+function MethodCard({
+  icon,
+  title,
+  desc,
+  list,
+}: {
+  icon: React.ReactNode
+  title: string
+  desc: string
+  list: string[]
+}) {
+  return (
+    <Card className="hover:shadow-md transition">
+      <CardHeader>
+        <CardTitle className="flex items-center gap-2 text-lg">{icon}{title}</CardTitle>
+        <CardDescription>{desc}</CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm text-slate-600">
+        <ul className="list-disc pl-5 space-y-1">
+          {list.map((it) => (<li key={it}>{it}</li>))}
+        </ul>
+      </CardContent>
+    </Card>
+  )
+}
+
+function CaseCard({
+  image,
+  title,
+  desc,
+  highlights,
+}: {
+  image: string
+  title: string
+  desc: string
+  highlights: string[]
+}) {
+  return (
+    <Card className="overflow-hidden hover:shadow-lg transition">
+      <CardContent className="p-0">
+        <Image
+          src={image || "/placeholder.svg?height=450&width=800&query=caso%20de%20exito%20tecnologia"}
+          alt={title}
+          width={800}
+          height={450}
+          className="w-full aspect-[16/9] object-cover"
+        />
+      </CardContent>
+      <CardHeader>
+        <CardTitle className="text-lg">{title}</CardTitle>
+        <CardDescription>{desc}</CardDescription>
+      </CardHeader>
+      <div className="px-6 pb-6 text-sm text-slate-700 space-y-1">
+        {highlights.map((h) => (<div key={h}>{h}</div>))}
+      </div>
+    </Card>
   )
 }
