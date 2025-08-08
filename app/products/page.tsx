@@ -3,12 +3,18 @@
 import { useMemo, useState } from "react"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import { Container, Row, Col, Form, Badge, Card, OverlayTrigger, Tooltip } from "react-bootstrap"
+import { Container, Row, Col, Form, Badge } from "react-bootstrap"
 import Image from "next/image"
-import { allProducts } from "@/lib/data"
+import { allProducts, featuredProducts } from "@/lib/data"
 import GlossaryLink from "@/components/glossary-link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTags } from "@fortawesome/free-solid-svg-icons"
+import ProductCard from "@/components/product-card"
+
+export const metadata = {
+  title: "Productos",
+  description: "Plataformas y soluciones listas para producción.",
+}
 
 export default function ProductsPage() {
   const [q, setQ] = useState("")
@@ -37,16 +43,15 @@ export default function ProductsPage() {
               </Col>
               <Col md={6} className="d-flex flex-wrap gap-2">
                 {categories.map((c) => (
-                  <OverlayTrigger key={c} placement="top" overlay={<Tooltip id={`tip-cat-${c}`}>Filtrar por {c}</Tooltip>}>
-                    <button
-                      onClick={() => setCategory(c)}
-                      className={`badge ${category === c ? "badge-soft" : "text-bg-light border"} rounded-pill py-2 px-3 d-inline-flex align-items-center gap-2`}
-                      aria-pressed={category === c}
-                    >
-                      <FontAwesomeIcon icon={faTags} className={category === c ? "text-primary" : "text-secondary"} />
-                      {c}
-                    </button>
-                  </OverlayTrigger>
+                  <button
+                    key={c}
+                    onClick={() => setCategory(c)}
+                    className={`badge ${category === c ? "badge-soft" : "text-bg-light border"} rounded-pill py-2 px-3 d-inline-flex align-items-center gap-2`}
+                    aria-pressed={category === c}
+                  >
+                    <FontAwesomeIcon icon={faTags} className={category === c ? "text-primary" : "text-secondary"} />
+                    {c}
+                  </button>
                 ))}
               </Col>
             </Row>
@@ -54,18 +59,7 @@ export default function ProductsPage() {
             <Row className="g-3">
               {items.map((p) => (
                 <Col key={p.id} sm={6} lg={4}>
-                  <Card className="h-100 card-hover">
-                    <div className="ratio ratio-16x9">
-                      <Image src={p.image || "/observabilidad-operaciones.png"} alt={p.name} fill style={{ objectFit: "cover" }} />
-                    </div>
-                    <Card.Body>
-                      <div className="d-flex justify-content-between align-items-start">
-                        <Card.Title className="h6 mb-0">{p.name}</Card.Title>
-                        <Badge bg="secondary">{p.category}</Badge>
-                      </div>
-                      <Card.Text className="text-muted small mt-2">{p.description}</Card.Text>
-                    </Card.Body>
-                  </Card>
+                  <ProductCard product={p} />
                 </Col>
               ))}
             </Row>

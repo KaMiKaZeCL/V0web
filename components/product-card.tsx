@@ -1,69 +1,48 @@
 "use client"
 
-import { Card, Button, Badge, OverlayTrigger, Tooltip, Popover } from "react-bootstrap"
 import Image from "next/image"
-import { useCart } from "./cart-provider"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCartPlus, faCircleInfo } from "@fortawesome/free-solid-svg-icons"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { useCart } from "./cart-context"
 
-type Product = {
+export type Product = {
   id: string
   name: string
   description: string
-  image: string
   price: number
+  image: string
   category: string
 }
 
 export default function ProductCard({ product }: { product: Product }) {
-  const { addItem } = useCart()
-
-  const pop = (
-    <Popover id={`pop-${product.id}`}>
-      <Popover.Header as="h3" className="h6 mb-0">{product.name}</Popover.Header>
-      <Popover.Body className="small">
-        {product.description}
-      </Popover.Body>
-    </Popover>
-  )
-
+  const { add } = useCart()
   return (
-    <Card className="h-100 card-hover">
-      <div className="ratio ratio-16x9">
+    <Card className="group h-full overflow-hidden border-stone-200">
+      <div className="relative aspect-[16/10] overflow-hidden bg-stone-100">
         <Image
-          src={product.image || "/placeholder.svg"}
+          src={product.image || "/placeholder.svg?height=600&width=900&query=producto"}
           alt={product.name}
           fill
-          style={{ objectFit: "cover" }}
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
         />
       </div>
-      <Card.Body>
-        <div className="d-flex justify-content-between align-items-start">
-          <Card.Title className="h6 mb-0 d-flex align-items-center gap-2">
-            {product.name}
-            <OverlayTrigger trigger={['hover', 'focus']} placement="top" overlay={pop}>
-              <span role="button" aria-label="Más info">
-                <FontAwesomeIcon icon={faCircleInfo} className="text-secondary" />
-              </span>
-            </OverlayTrigger>
-          </Card.Title>
-          <Badge bg="secondary">{product.category}</Badge>
-        </div>
-        <Card.Text className="text-muted small mt-2">{product.description}</Card.Text>
-        <div className="d-flex justify-content-between align-items-center">
-          <div className="fw-semibold">{"$" + product.price.toLocaleString()}</div>
-          <OverlayTrigger placement="top" overlay={<Tooltip id={`tip-add-${product.id}`}>Agregar al carrito</Tooltip>}>
-            <Button
-              variant="primary"
-              className="px-3 d-inline-flex align-items-center gap-2"
-              onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image }, 1)}
-            >
-              <FontAwesomeIcon icon={faCartPlus} />
-              <span>Agregar</span>
-            </Button>
-          </OverlayTrigger>
-        </div>
-      </Card.Body>
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-base font-semibold">{product.name}</CardTitle>
+        <div className="text-xs uppercase tracking-wider text-stone-500">{product.category}</div>
+      </CardHeader>
+      <CardContent>
+        <p className="line-clamp-2 text-sm text-stone-600">{product.description}</p>
+      </CardContent>
+      <CardFooter className="flex items-center justify-between">
+        <div className="text-sm font-semibold">${product.price.toLocaleString()}</div>
+        <Button
+          variant="outline"
+          className="rounded-md border-stone-300"
+          onClick={() => add({ id: product.id, name: product.name, price: product.price, image: product.image }, 1)}
+        >
+          Agregar
+        </Button>
+      </CardFooter>
     </Card>
   )
 }
