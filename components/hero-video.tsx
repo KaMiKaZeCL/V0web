@@ -15,21 +15,21 @@ export default function HeroVideo() {
   }, [])
 
   return (
-    <div className="relative w-full h-[60vh] md:h-[70vh] bg-black">
+    <div className="relative w-full h-[60vh] md:h-[70vh] bg-white">
       <video
         ref={videoRef}
         autoPlay
         muted
         playsInline
         loop
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
         poster="/futuristic-tech-landscape-4k.png"
       >
         <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" type="video/mp4" />
         <source src="https://media.w3.org/2010/05/bunny/trailer.mp4" type="video/mp4" />
       </video>
       {!canPlay && (
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-emerald-700/30 via-background/30 to-background/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/30 via-white/50 to-white/70" />
       )}
     </div>
   )
