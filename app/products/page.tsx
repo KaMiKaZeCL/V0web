@@ -3,9 +3,7 @@
 import { useMemo, useState } from "react"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Container, Row, Col, Form, Badge, Card } from "react-bootstrap"
 import Image from "next/image"
 import { allProducts } from "@/lib/data"
 import GlossaryLink from "@/components/glossary-link"
@@ -22,56 +20,57 @@ export default function ProductsPage() {
   }, [q, category])
 
   return (
-    <div className="min-h-screen bg-background">
+    <div>
       <SiteHeader />
-      <main className="container max-w-6xl mx-auto px-4 py-12 md:py-16">
-        <div className="mb-6">
-          <Badge variant="secondary" className="rounded-full">Productos</Badge>
-          <h1 className="text-3xl md:text-4xl font-semibold mt-3">Plataformas, hardware y software listos</h1>
-          <p className="text-slate-600 mt-2">Desde <strong>servidores</strong> y <strong>workstations</strong>, hasta <strong>laptops/notebooks</strong>, <strong>tablets</strong>, <strong>pantallas</strong>, <strong>impresoras</strong>, <strong>data center</strong> y <strong>partes y piezas</strong>. También plataformas de IA, nube y seguridad.</p>
-        </div>
-        <div className="flex flex-col md:flex-row items-stretch gap-3 mb-6">
-          <Input placeholder="Buscar productos..." value={q} onChange={(e) => setQ(e.target.value)} />
-          <div className="flex gap-2 flex-wrap">
-            {categories.map((c) => (
-              <button
-                key={c}
-                onClick={() => setCategory(c)}
-                className={`px-3 py-1.5 rounded-full border text-sm ${category === c ? "bg-emerald-600 text-white border-emerald-600" : "hover:bg-muted"}`}
-                aria-pressed={category === c}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
+      <main>
+        <section className="py-5">
+          <Container>
+            <Badge bg="secondary" className="rounded-pill">Productos</Badge>
+            <h1 className="h2 fw-semibold mt-2">Plataformas, hardware y software listos</h1>
+            <p className="text-muted">Desde servidores y workstations, hasta laptops/notebooks, tablets, pantallas, impresoras, data center y partes y piezas. También plataformas de IA, nube y seguridad.</p>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((p) => (
-            <Card key={p.id} className="overflow-hidden hover:shadow-lg transition">
-              <CardContent className="p-0">
-                <Image
-                  src={p.image || "/placeholder.svg"}
-                  alt={p.name}
-                  width={800}
-                  height={500}
-                  className="w-full aspect-[16/9] object-cover"
-                />
-              </CardContent>
-              <CardHeader>
-                <div className="flex items-center justify-between gap-2">
-                  <CardTitle className="text-lg">{p.name}</CardTitle>
-                  <Badge variant="secondary">{p.category}</Badge>
-                </div>
-                <CardDescription>{p.description}</CardDescription>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
+            <Row className="g-2 align-items-stretch mb-3">
+              <Col md={6}>
+                <Form.Control placeholder="Buscar productos..." value={q} onChange={(e) => setQ(e.target.value)} />
+              </Col>
+              <Col md={6} className="d-flex flex-wrap gap-2">
+                {categories.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => setCategory(c)}
+                    className={`btn btn-sm ${category === c ? "btn-success" : "btn-outline-secondary"}`}
+                    aria-pressed={category === c}
+                  >
+                    {c}
+                  </button>
+                ))}
+              </Col>
+            </Row>
 
-        <div className="mt-10 text-sm text-slate-600">
-          Nota: Integramos <GlossaryLink termKey="finops">FinOps</GlossaryLink> para optimizar costos de infraestructura y plataformas.
-        </div>
+            <Row className="g-3">
+              {items.map((p) => (
+                <Col key={p.id} sm={6} lg={4}>
+                  <Card className="h-100">
+                    <div className="ratio ratio-16x9">
+                      <Image src={p.image || "/placeholder.svg"} alt={p.name} fill style={{ objectFit: "cover" }} />
+                    </div>
+                    <Card.Body>
+                      <div className="d-flex justify-content-between align-items-start">
+                        <Card.Title className="h6 mb-0">{p.name}</Card.Title>
+                        <Badge bg="secondary">{p.category}</Badge>
+                      </div>
+                      <Card.Text className="text-muted small mt-2">{p.description}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+
+            <div className="mt-3 text-muted small">
+              Nota: Integramos <GlossaryLink termKey="finops">FinOps</GlossaryLink> para optimizar costos de infraestructura y plataformas.
+            </div>
+          </Container>
+        </section>
       </main>
       <SiteFooter />
     </div>

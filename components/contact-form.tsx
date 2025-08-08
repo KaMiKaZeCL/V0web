@@ -1,16 +1,11 @@
 "use client"
 
 import { useState, useTransition } from "react"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { Button } from "@/components/ui/button"
+import { Form, Button } from "react-bootstrap"
 import { useToast } from "@/hooks/use-toast"
-import { experimental_taintUniqueValue } from "react"
 
 async function submitLead(formData: FormData) {
   "use server"
-  // Simulación de procesamiento en servidor
   const payload = Object.fromEntries(formData.entries())
   console.log("Nuevo lead:", payload)
   await new Promise((r) => setTimeout(r, 800))
@@ -26,7 +21,7 @@ export default function ContactForm() {
   const [message, setMessage] = useState("")
 
   return (
-    <form
+    <Form
       action={(formData) =>
         startTransition(async () => {
           const res = await submitLead(formData)
@@ -34,31 +29,30 @@ export default function ContactForm() {
             toast({ title: "Enviado", description: "Gracias, te contactaremos pronto." })
             setName(""); setEmail(""); setCompany(""); setMessage("")
           } else {
-            toast({ title: "Error", description: "Intenta nuevamente", variant: "destructive" })
+            toast({ title: "Error", description: "Intenta nuevamente", variant: "destructive" as any })
           }
         })
       }
-      className="grid gap-4"
     >
-      <div className="grid gap-2">
-        <Label htmlFor="name">Nombre</Label>
-        <Input id="name" name="name" required value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="email">Email</Label>
-        <Input id="email" name="email" type="email" placeholder="tucorreo@empresa.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="company">Empresa</Label>
-        <Input id="company" name="company" value={company} onChange={(e) => setCompany(e.target.value)} />
-      </div>
-      <div className="grid gap-2">
-        <Label htmlFor="message">Mensaje</Label>
-        <Textarea id="message" name="message" rows={5} required value={message} onChange={(e) => setMessage(e.target.value)} />
-      </div>
-      <Button type="submit" disabled={pending} className="bg-emerald-600 hover:bg-emerald-700">
+      <Form.Group className="mb-3" controlId="name">
+        <Form.Label>Nombre</Form.Label>
+        <Form.Control name="name" required value={name} onChange={(e) => setName(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="email">
+        <Form.Label>Email</Form.Label>
+        <Form.Control name="email" type="email" placeholder="tucorreo@empresa.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="company">
+        <Form.Label>Empresa</Form.Label>
+        <Form.Control name="company" value={company} onChange={(e) => setCompany(e.target.value)} />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="message">
+        <Form.Label>Mensaje</Form.Label>
+        <Form.Control as="textarea" name="message" rows={5} required value={message} onChange={(e) => setMessage(e.target.value)} />
+      </Form.Group>
+      <Button type="submit" disabled={pending} variant="success">
         {pending ? "Enviando..." : "Enviar"}
       </Button>
-    </form>
+    </Form>
   )
 }

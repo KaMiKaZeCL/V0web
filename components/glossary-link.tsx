@@ -1,9 +1,8 @@
 "use client"
 
 import Link from "next/link"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { OverlayTrigger, Tooltip } from "react-bootstrap"
 import { glossary } from "@/lib/glossary"
-import { cn } from "@/lib/utils"
 
 function slugify(key: string) {
   return key.toLowerCase().replace(/\s+/g, "-")
@@ -24,18 +23,18 @@ export default function GlossaryLink({
   if (!entry) return <span className={className}>{label}</span>
 
   return (
-    <TooltipProvider delayDuration={150}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Link href={href} className={cn("underline underline-offset-4 decoration-emerald-400 hover:text-emerald-700", className)}>
-            {label}
-          </Link>
-        </TooltipTrigger>
-        <TooltipContent className="max-w-xs text-sm">
-          <div className="font-medium">{entry.term}</div>
-          <div className="text-muted-foreground mt-1">{entry.definition}</div>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <OverlayTrigger
+      placement="top"
+      overlay={
+        <Tooltip id={`gloss-${termKey}`}>
+          <div className="fw-semibold small">{entry.term}</div>
+          <div className="small">{entry.definition}</div>
+        </Tooltip>
+      }
+    >
+      <Link href={href} className={className ? className : "text-decoration-underline"}>
+        {label}
+      </Link>
+    </OverlayTrigger>
   )
 }

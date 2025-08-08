@@ -1,8 +1,7 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, Button } from "react-bootstrap"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import { useCart } from "./cart-provider"
 
 type Product = {
@@ -18,31 +17,29 @@ export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCart()
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition">
-      <CardContent className="p-0">
+    <Card className="h-100">
+      <div className="ratio ratio-16x9">
         <Image
           src={product.image || "/placeholder.svg"}
           alt={product.name}
-          width={800}
-          height={500}
-          className="w-full aspect-[16/9] object-cover"
+          fill
+          style={{ objectFit: "cover" }}
         />
-      </CardContent>
-      <CardHeader>
-        <div className="flex items-center justify-between gap-2">
-          <CardTitle className="text-lg">{product.name}</CardTitle>
-          <div className="font-semibold">${product.price.toLocaleString()}</div>
+      </div>
+      <Card.Body>
+        <div className="d-flex justify-content-between align-items-start">
+          <Card.Title className="h6 mb-0">{product.name}</Card.Title>
+          <div className="fw-semibold">${product.price.toLocaleString()}</div>
         </div>
-        <CardDescription>{product.description}</CardDescription>
-      </CardHeader>
-      <div className="px-6 pb-6">
+        <Card.Text className="text-muted small mt-2">{product.description}</Card.Text>
         <Button
-          className="w-full bg-emerald-600 hover:bg-emerald-700"
+          variant="success"
+          className="w-100 mt-2"
           onClick={() => addItem({ id: product.id, name: product.name, price: product.price, image: product.image }, 1)}
         >
           Agregar al carrito
         </Button>
-      </div>
+      </Card.Body>
     </Card>
   )
 }

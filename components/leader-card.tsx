@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "react-bootstrap"
 import Image from "next/image"
 import { Quote } from 'lucide-react'
 
@@ -11,23 +11,22 @@ export type Leader = {
 
 export function LeaderCard({ leader }: { leader: Leader }) {
   return (
-    <Card className="overflow-hidden hover:shadow-md transition">
-      <CardContent className="p-0">
+    <Card className="h-100">
+      <div className="ratio ratio-4x3">
         <Image
           src={leader.image || "/placeholder.svg"}
           alt={leader.name}
-          width={800}
-          height={500}
-          className="w-full aspect-[4/3] object-cover"
+          fill
+          style={{ objectFit: "cover" }}
         />
-      </CardContent>
-      <CardHeader>
-        <CardTitle className="text-lg">{leader.name}</CardTitle>
-        <CardDescription>{leader.role}</CardDescription>
-      </CardHeader>
-      <div className="px-6 pb-6 text-sm text-muted-foreground">
-        <Quote className="inline w-4 h-4 mr-1 text-emerald-600" aria-hidden /> {leader.quote}
       </div>
+      <Card.Body>
+        <Card.Title className="h6 mb-1">{leader.name}</Card.Title>
+        <div className="text-muted small">{leader.role}</div>
+        <div className="small text-muted mt-2">
+          <Quote size={16} className="me-1 text-success" /> {leader.quote}
+        </div>
+      </Card.Body>
     </Card>
   )
 }

@@ -3,8 +3,7 @@
 import { useMemo, useState } from "react"
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Container, Row, Col, Form, Card } from "react-bootstrap"
 import { glossary } from "@/lib/glossary"
 
 function slugify(key: string) {
@@ -27,34 +26,36 @@ export default function GlossaryPage() {
   }, [q])
 
   return (
-    <div className="min-h-screen bg-white">
+    <div>
       <SiteHeader />
-      <main className="container max-w-5xl mx-auto px-4 py-12 md:py-16">
-        <div className="mb-6">
-          <h1 className="text-3xl md:text-4xl font-semibold">Glosario técnico</h1>
-          <p className="text-slate-600 mt-2">
-            Definiciones claras y modernas para que conversemos en el mismo idioma.
-          </p>
-          <div className="mt-4">
-            <Input placeholder="Buscar (ej: SLA, SRE, RAG…)" value={q} onChange={(e) => setQ(e.target.value)} />
-          </div>
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-4">
-          {entries.map((e) => (
-            <Card key={e.key} id={slugify(e.key)} className="scroll-mt-24">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-lg">{e.term}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-slate-700">
-                <p>{e.definition}</p>
-                {e.aka && e.aka.length > 0 && (
-                  <p className="mt-2 text-slate-500"><span className="font-medium">También conocido como:</span> {e.aka.join(", ")}</p>
-                )}
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+      <main>
+        <section className="py-5">
+          <Container>
+            <h1 className="h2 fw-semibold">Glosario técnico</h1>
+            <p className="text-muted">Definiciones claras y modernas para que conversemos en el mismo idioma.</p>
+            <Form.Control
+              placeholder="Buscar (ej: SLA, SRE, RAG…)"
+              className="my-3"
+              value={q}
+              onChange={(e) => setQ(e.target.value)}
+            />
+            <Row className="g-3">
+              {entries.map((e) => (
+                <Col key={e.key} sm={6}>
+                  <Card id={slugify(e.key)} className="h-100">
+                    <Card.Body>
+                      <Card.Title className="h6">{e.term}</Card.Title>
+                      <Card.Text className="small mb-0">{e.definition}</Card.Text>
+                      {e.aka && e.aka.length > 0 && (
+                        <div className="small text-muted mt-2"><span className="fw-semibold">También conocido como:</span> {e.aka.join(", ")}</div>
+                      )}
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
+        </section>
       </main>
       <SiteFooter />
     </div>

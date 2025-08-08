@@ -1,9 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { Play } from 'lucide-react'
 import { useState } from "react"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Modal, Row, Col } from "react-bootstrap"
+import { Play } from 'lucide-react'
 
 type MediaItem =
   | { type: "image"; src: string; alt: string; width?: number; height?: number }
@@ -15,56 +15,61 @@ export default function MediaGallery({ items = [] as MediaItem[] }) {
 
   return (
     <>
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Row className="g-3">
         {items.map((it, i) => {
           if (it.type === "image") {
             return (
-              <div key={i} className="relative overflow-hidden rounded-xl border">
-                <Image
-                  src={it.src || "/placeholder.svg"}
-                  alt={it.alt}
-                  width={it.width || 900}
-                  height={it.height || 600}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              <Col key={i} sm={6} lg={4}>
+                <div className="rounded border overflow-hidden">
+                  <div className="ratio ratio-16x9">
+                    <Image
+                      src={it.src || "/placeholder.svg"}
+                      alt={it.alt}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                </div>
+              </Col>
             )
           }
           return (
-            <button
-              key={i}
-              className="group relative overflow-hidden rounded-xl border aspect-video"
-              onClick={() => { setVideoSrc(it.src); setOpen(true) }}
-              aria-label={`Reproducir video: ${it.alt}`}
-            >
-              <video
-                src={it.src}
-                muted
-                playsInline
-                loop
-                poster={it.poster}
-                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition" />
-              <Play className="absolute inset-0 m-auto w-10 h-10 text-white drop-shadow" />
-            </button>
+            <Col key={i} sm={6} lg={4}>
+              <button
+                className="position-relative w-100 rounded border overflow-hidden ratio ratio-16x9"
+                onClick={() => { setVideoSrc(it.src); setOpen(true) }}
+                aria-label={`Reproducir video: ${it.alt}`}
+              >
+                <video
+                  src={it.src}
+                  muted
+                  playsInline
+                  loop
+                  poster={it.poster}
+                  className="position-absolute top-0 start-0 w-100 h-100"
+                  style={{ objectFit: "cover", opacity: 0.9 }}
+                />
+                <div className="position-absolute top-0 start-0 w-100 h-100" style={{ background: "rgba(0,0,0,0.2)" }} />
+                <Play className="position-absolute top-50 start-50 translate-middle text-white" size={32} />
+              </button>
+            </Col>
           )
         })}
-      </div>
+      </Row>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="p-0 max-w-4xl">
+      <Modal show={open} onHide={() => setOpen(false)} size="lg" centered>
+        <Modal.Body className="p-0">
           {videoSrc && (
             <video
               src={videoSrc}
               autoPlay
               controls
               playsInline
-              className="w-full h-full"
+              className="w-100 h-100"
             />
           )}
-        </DialogContent>
-      </Dialog>
+        </Modal.Body>
+      </Modal>
     </>
   )
 }

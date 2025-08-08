@@ -1,198 +1,180 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle2, GaugeCircle, ShieldCheck, Zap, Bot, Cloud, Factory, Wrench, BarChart3 } from 'lucide-react'
 import SiteHeader from "@/components/site-header"
 import SiteFooter from "@/components/site-footer"
-import AuroraHero from "@/components/aurora-hero"
 import MarqueeLogos from "@/components/marquee-logos"
 import MediaGallery from "@/components/media-gallery"
-import { clients } from "@/lib/data"
 import GlossaryLink from "@/components/glossary-link"
+import { clients } from "@/lib/data"
+import Link from "next/link"
+import Image from "next/image"
+import { Container, Row, Col, Button, Card, Badge } from "react-bootstrap"
+import { CheckCircle2, ShieldCheck, Gauge, Bot, Cloud, Factory, Wrench, BarChart3, Zap } from 'lucide-react'
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-white">
+    <div>
       <SiteHeader />
-      <main className="flex flex-col">
-        {/* Hero diferenciador */}
-        <AuroraHero
-          eyebrow="Consultoría + Ingeniería + Operaciones"
-          title="Diseñamos, construimos y operamos para producción"
-          subtitle="Transformamos objetivos de negocio en plataformas y servicios confiables. Agentes de IA, nubes híbridas, ciberseguridad, IoT y software a la medida, con métricas claras, "
-        />
-
-        {/* Logos en marquee */}
-        <section className="border-t">
-          <div className="container max-w-6xl mx-auto px-4 py-8 md:py-12">
-            <div className="text-center space-y-2 mb-6">
-              <p className="text-sm text-slate-500">Equipos que confían en abordajes modernos y medibles</p>
-            </div>
-            <MarqueeLogos items={clients as any} />
-          </div>
-        </section>
-
-        {/* Propuesta de valor con foco en resultados */}
-        <section className="border-t bg-slate-50">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="grid md:grid-cols-12 gap-10 items-start">
-              <div className="md:col-span-6">
-                <Badge variant="secondary" className="rounded-full">Propuesta de valor</Badge>
-                <h2 className="mt-3 text-3xl md:text-4xl font-semibold tracking-tight">
-                  Tecnología que impacta KPIs del negocio
-                </h2>
-                <p className="mt-4 text-slate-600 text-lg">
-                  Combinamos estrategia, arquitectura y entrega continua para acelerar el time‑to‑value. Operamos con{" "}
-                  <GlossaryLink termKey="okr">OKRs</GlossaryLink> y{" "}
-                  <GlossaryLink termKey="kpi">KPIs</GlossaryLink> visibles —desde uptime y seguridad, hasta lead time de cambios— y
-                  asumimos <GlossaryLink termKey="sla">SLAs</GlossaryLink> que responden a la criticidad de tu operación.
+      <main>
+        {/* Hero */}
+        <section className="py-5 bg-light border-bottom">
+          <Container>
+            <Row className="align-items-center gy-4">
+              <Col md={7}>
+                <span className="badge rounded-pill text-bg-success">Consultoría + Ingeniería + Operaciones</span>
+                <h1 className="display-5 fw-semibold mt-3">Diseñamos, construimos y operamos para producción</h1>
+                <p className="lead text-muted">
+                  Transformamos objetivos de negocio en plataformas y servicios confiables. Agentes de IA, nubes híbridas, ciberseguridad, IoT y software a la medida, con métricas claras.
                 </p>
-                <ul className="mt-6 space-y-3 text-sm text-slate-700">
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Enfoque AI‑first y plataformas componibles</li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Seguridad por diseño y <GlossaryLink termKey="observability">observabilidad</GlossaryLink> e2e</li>
-                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-emerald-600 mt-0.5" /> Operación <GlossaryLink termKey="sre">SRE</GlossaryLink> con compromisos explícitos</li>
+                <div className="d-flex gap-2 mt-2">
+                  <Button as={Link} href="/contact" variant="success">Conversemos</Button>
+                  <Button as={Link} href="/services" variant="outline-secondary">Explorar servicios</Button>
+                </div>
+                <div className="text-muted small mt-2">
+                  Operamos con KPIs y SLAs explícitos: uptime, seguridad, performance y experiencia.
+                </div>
+              </Col>
+              <Col md={5}>
+                <div className="ratio ratio-16x9 rounded border overflow-hidden">
+                  <Image src="/futuristic-tech-landscape-4k.png" alt="Fondo tecnológico" fill style={{ objectFit: "cover" }} />
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+
+        {/* Logos marquee */}
+        <section className="py-4 border-bottom">
+          <Container>
+            <p className="text-center text-muted small mb-3">Equipos que confían en abordajes modernos y medibles</p>
+            <MarqueeLogos items={clients as any} />
+          </Container>
+        </section>
+
+        {/* Propuesta de valor */}
+        <section className="py-5 bg-light border-bottom">
+          <Container>
+            <Row className="gy-4">
+              <Col md={6}>
+                <Badge bg="secondary" className="rounded-pill">Propuesta de valor</Badge>
+                <h2 className="h2 fw-semibold mt-2">Tecnología que impacta KPIs del negocio</h2>
+                <p className="mt-2">
+                  Combinamos estrategia, arquitectura y entrega continua para acelerar el time‑to‑value. Operamos con <GlossaryLink termKey="okr">OKRs</GlossaryLink> y <GlossaryLink termKey="kpi">KPIs</GlossaryLink> visibles —desde uptime y seguridad, hasta lead time de cambios— y asumimos <GlossaryLink termKey="sla">SLAs</GlossaryLink> acordes a tu operación.
+                </p>
+                <ul className="mt-3">
+                  <li className="d-flex gap-2"><CheckCircle2 size={18} className="text-success mt-1" /> Enfoque AI‑first y plataformas componibles</li>
+                  <li className="d-flex gap-2"><CheckCircle2 size={18} className="text-success mt-1" /> Seguridad por diseño y <GlossaryLink termKey="observability">observabilidad</GlossaryLink> end‑to‑end</li>
+                  <li className="d-flex gap-2"><CheckCircle2 size={18} className="text-success mt-1" /> Operación <GlossaryLink termKey="sre">SRE</GlossaryLink> con compromisos explícitos</li>
                 </ul>
-                <div className="mt-6 flex gap-3">
-                  <Button asChild className="bg-emerald-600 hover:bg-emerald-700">
-                    <Link href="/contact">Conversemos</Link>
-                  </Button>
-                  <Button asChild variant="outline">
-                    <Link href="/about">Quiénes somos</Link>
-                  </Button>
+                <div className="d-flex gap-2 mt-3">
+                  <Button as={Link} href="/contact" variant="success">Conversemos</Button>
+                  <Button as={Link} href="/about" variant="outline-secondary">Quiénes somos</Button>
                 </div>
-              </div>
-              <div className="md:col-span-6">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <Card className="border-emerald-100">
-                    <CardHeader className="pb-2">
-                      <CardTitle className="flex items-center gap-2 text-lg"><GaugeCircle className="w-5 h-5 text-emerald-600" /> KPIs operacionales</CardTitle>
-                      <CardDescription>Compromisos visibles y auditables</CardDescription>
-                    </CardHeader>
-                    <CardContent className="grid grid-cols-2 gap-3 text-sm">
-                      <div><div className="text-2xl font-semibold">99,95%</div><div className="text-slate-500">Uptime</div></div>
-                      <div><div className="text-2xl font-semibold">{'< 24h'}</div><div className="text-slate-500">Lead time cambios</div></div>
-                      <div><div className="text-2xl font-semibold">{'< 60m'}</div><div className="text-slate-500"><GlossaryLink termKey="mttr">MTTR</GlossaryLink></div></div>
-                      <div><div className="text-2xl font-semibold">{'> 70'}</div><div className="text-slate-500">NPS</div></div>
-                    </CardContent>
-                  </Card>
-                  <Card>
-                    <CardHeader className="pb-2">
-                      <CardTitle className="flex items-center gap-2 text-lg"><ShieldCheck className="w-5 h-5 text-violet-600" /> Seguridad y cumplimiento</CardTitle>
-                      <CardDescription><GlossaryLink termKey="zero-trust">Zero Trust</GlossaryLink>, <GlossaryLink termKey="iam">IAM</GlossaryLink> y hardening</CardDescription>
-                    </CardHeader>
-                    <CardContent className="text-sm text-slate-600">
-                      <GlossaryLink termKey="iam">Gestión de identidades</GlossaryLink>, <GlossaryLink termKey="mfa">MFA</GlossaryLink>, segmentación, escaneo continuo (<GlossaryLink termKey="sast">SAST</GlossaryLink>/<GlossaryLink termKey="dast">DAST</GlossaryLink>), política de parches y
-                      respuesta a incidentes con runbooks. Alineados a ISO/IEC 27001 y NIST.
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            </div>
-          </div>
+              </Col>
+              <Col md={6}>
+                <Row className="g-3">
+                  <Col sm={6}>
+                    <Card className="h-100">
+                      <Card.Body>
+                        <Card.Title className="h6 d-flex align-items-center gap-2 mb-1"><Gauge size={18} className="text-success" /> KPIs operacionales</Card.Title>
+                        <Card.Subtitle className="text-muted small">Compromisos visibles y auditables</Card.Subtitle>
+                        <Row className="mt-3 gy-2 small">
+                          <Col xs={6}><div className="fw-semibold">99,95%</div><div className="text-muted">Uptime</div></Col>
+                          <Col xs={6}><div className="fw-semibold">{'< 24h'}</div><div className="text-muted">Lead time</div></Col>
+                          <Col xs={6}><div className="fw-semibold">{'< 60m'}</div><div className="text-muted"><GlossaryLink termKey="mttr">MTTR</GlossaryLink></div></Col>
+                          <Col xs={6}><div className="fw-semibold">{'> 70'}</div><div className="text-muted">NPS</div></Col>
+                        </Row>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                  <Col sm={6}>
+                    <Card className="h-100">
+                      <Card.Body>
+                        <Card.Title className="h6 d-flex align-items-center gap-2 mb-1"><ShieldCheck size={18} className="text-primary" /> Seguridad y cumplimiento</Card.Title>
+                        <Card.Subtitle className="text-muted small"><GlossaryLink termKey="zero-trust">Zero Trust</GlossaryLink>, <GlossaryLink termKey="iam">IAM</GlossaryLink> y hardening</Card.Subtitle>
+                        <div className="small text-muted mt-2">
+                          <GlossaryLink termKey="iam">Gestión de identidades</GlossaryLink>, <GlossaryLink termKey="mfa">MFA</GlossaryLink>, segmentación, escaneo continuo (<GlossaryLink termKey="sast">SAST</GlossaryLink>/<GlossaryLink termKey="dast">DAST</GlossaryLink>), política de parches y respuesta a incidentes con runbooks.
+                        </div>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+          </Container>
         </section>
 
-        {/* Servicios → Resultados */}
-        <section className="border-t">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="flex items-center justify-between gap-3 flex-wrap">
+        {/* Servicios */}
+        <section className="py-5 border-bottom">
+          <Container>
+            <div className="d-flex flex-wrap justify-content-between align-items-center gap-2">
               <div>
-                <h2 className="text-3xl font-semibold">Servicios que se traducen en resultados</h2>
-                <p className="text-slate-600">De la estrategia a la operación continua, con métricas claras.</p>
+                <h2 className="h2 fw-semibold">Servicios que se traducen en resultados</h2>
+                <p className="text-muted mb-0">De la estrategia a la operación continua, con métricas claras.</p>
               </div>
-              <Button asChild variant="ghost" className="gap-2">
-                <Link href="/services">Ver catálogo completo <ArrowIcon /></Link>
-              </Button>
+              <Button as={Link} href="/services" variant="link">Ver catálogo completo →</Button>
             </div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6">
-              <ServiceCard
-                icon={<Bot className="w-5 h-5 text-violet-600" />}
-                title="Agentes de IA"
-                points={[
-                  <span key="p1"><GlossaryLink termKey="rag">RAG</GlossaryLink> evaluado y trazable</span> as unknown as string,
-                  "Orquestación con herramientas",
-                  "Guardrails y observabilidad LLM",
-                ]}
-                outcome="Aumento de autoservicio y reducción de tiempos de respuesta."
-              />
-              <ServiceCard
-                icon={<Cloud className="w-5 h-5 text-emerald-600" />}
-                title="Nube y Plataformas"
-                points={[
-                  <span key="p2"><GlossaryLink termKey="idp">IDP</GlossaryLink> y plataformas componibles</span> as unknown as string,
-                  <span key="p3"><GlossaryLink termKey="finops">FinOps</GlossaryLink> y resiliencia</span> as unknown as string,
-                  "SRE 24/7 y performance",
-                ]}
-                outcome="Ejecución consistente y costos bajo control."
-              />
-              <ServiceCard
-                icon={<Factory className="w-5 h-5 text-emerald-600" />}
-                title="IoT y Edge"
-                points={[
-                  <span key="p4">Redes <GlossaryLink termKey="5g">5G</GlossaryLink>/<GlossaryLink termKey="lorawan">LoRaWAN</GlossaryLink> y edge AI</span> as unknown as string,
-                  "Telemetría y control en tiempo real",
-                  "Seguridad de dispositivos",
-                ]}
-                outcome="Visibilidad y acción inmediata en terreno."
-              />
-              <ServiceCard
-                icon={<Wrench className="w-5 h-5 text-violet-600" />}
-                title="DevEx y Modernización"
-                points={[
-                  "Golden paths y portales de dev",
-                  <span key="p5"><GlossaryLink termKey="ci-cd">CI/CD</GlossaryLink> con calidad y seguridad</span> as unknown as string,
-                  "Arquitectura modular",
-                ]}
-                outcome="Cycle time menor y menos incidentes."
-              />
-            </div>
-          </div>
+            <Row className="g-3 mt-1">
+              {[
+                { icon: <Bot size={18} className="text-primary" />, title: "Agentes de IA", points: ["RAG evaluado y trazable", "Orquestación con herramientas", "Guardrails y observabilidad LLM"], outcome: "Más autoservicio, menor tiempo de respuesta." },
+                { icon: <Cloud size={18} className="text-success" />, title: "Nube y Plataformas", points: ["IDP y plataformas componibles", "FinOps y resiliencia", "SRE 24/7 y performance"], outcome: "Ejecución consistente y costos bajo control." },
+                { icon: <Factory size={18} className="text-success" />, title: "IoT y Edge", points: ["5G/LoRaWAN y edge AI", "Telemetría y control", "Seguridad de dispositivos"], outcome: "Visibilidad y acción inmediata." },
+                { icon: <Wrench size={18} className="text-primary" />, title: "DevEx y Modernización", points: ["Golden paths y portales", "CI/CD con calidad y seguridad", "Arquitectura modular"], outcome: "Menor cycle time y menos incidentes." },
+              ].map((s) => (
+                <Col key={s.title} sm={6} lg={3}>
+                  <Card className="h-100">
+                    <Card.Body>
+                      <Card.Title className="h6 d-flex align-items-center gap-2">{s.icon}{s.title}</Card.Title>
+                      <Card.Subtitle className="text-muted small">De la estrategia a la operación</Card.Subtitle>
+                      <ul className="small mt-2 mb-2">
+                        {s.points.map((p) => (<li key={p}>{p}</li>))}
+                      </ul>
+                      <div className="small">{s.outcome}</div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
         </section>
 
-        {/* Metodología, SLA y gobierno */}
-        <section className="border-t bg-slate-50">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="text-center space-y-2">
-              <Badge className="rounded-full bg-emerald-600 hover:bg-emerald-600 text-white">Cómo trabajamos</Badge>
-              <h2 className="text-3xl md:text-4xl font-semibold">Metodología clara, SLAs exigentes y KPIs visibles</h2>
-              <p className="text-slate-600">Un marco que combina agilidad, gobierno y confiabilidad operacional.</p>
+        {/* Metodología */}
+        <section className="py-5 bg-light border-bottom">
+          <Container>
+            <div className="text-center">
+              <span className="badge rounded-pill text-bg-success">Cómo trabajamos</span>
+              <h2 className="h2 fw-semibold mt-2">Metodología clara, SLAs exigentes y KPIs visibles</h2>
+              <p className="text-muted">Marco que combina agilidad, gobierno y confiabilidad operacional.</p>
             </div>
-            <div className="grid md:grid-cols-3 gap-6 mt-8">
-              <MethodCard
-                icon={<BarChart3 className="w-5 h-5 text-emerald-600" />}
-                title="Descubrimiento y OKRs"
-                desc="Entendemos impacto, restricciones y casos de uso; definimos OKRs, KPIs y criterios de éxito."
-                list={["Mapa de valor", "KPIs/SLAs iniciales", "Roadmap priorizado"]}
-              />
-              <MethodCard
-                icon={<Zap className="w-5 h-5 text-violet-600" />}
-                title="Entrega continua"
-                desc="Sprints cortos, feedback semanal y demostraciones en entorno real desde temprano."
-                list={["Trunk-based + CI/CD", "Pruebas automatizadas", "Versionado y canary"]}
-              />
-              <MethodCard
-                icon={<ShieldCheck className="w-5 h-5 text-emerald-600" />}
-                title="Operación SRE"
-                desc="SLOs, observabilidad e incident response. Postmortems y mejora continua."
-                list={["SLOs por servicio", "Runbooks y on-call", "Reportes mensuales de KPIs"]}
-              />
-            </div>
-          </div>
+            <Row className="g-3 mt-1">
+              {[
+                { icon: <BarChart3 size={18} className="text-success" />, title: "Descubrimiento y OKRs", desc: "Impacto, restricciones y casos de uso; OKRs, KPIs y éxito.", list: ["Mapa de valor", "KPIs/SLAs iniciales", "Roadmap priorizado"] },
+                { icon: <Zap size={18} className="text-primary" />, title: "Entrega continua", desc: "Demos tempranas y feedback continuo.", list: ["Trunk-based + CI/CD", "Pruebas automatizadas", "Versionado y canary"] },
+                { icon: <ShieldCheck size={18} className="text-success" />, title: "Operación SRE", desc: "SLOs, observabilidad e incident response.", list: ["SLOs por servicio", "Runbooks y on-call", "Reportes mensuales"] },
+              ].map((m) => (
+                <Col key={m.title} md={4}>
+                  <Card className="h-100">
+                    <Card.Body>
+                      <Card.Title className="h6 d-flex align-items-center gap-2">{m.icon}{m.title}</Card.Title>
+                      <Card.Subtitle className="text-muted small">{m.desc}</Card.Subtitle>
+                      <ul className="small mt-2 mb-0">
+                        {m.list.map((x) => (<li key={x}>{x}</li>))}
+                      </ul>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
         </section>
 
-        {/* Galería de medios: imágenes y videos */}
-        <section className="border-t">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="flex items-center justify-between gap-3 flex-wrap mb-6">
+        {/* Galería */}
+        <section className="py-5 border-bottom">
+          <Container>
+            <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-2">
               <div>
-                <h2 className="text-3xl font-semibold">Ver para creer</h2>
-                <p className="text-slate-600">Demos cortas y vistas reales de nuestras plataformas y operaciones.</p>
+                <h2 className="h2 fw-semibold">Ver para creer</h2>
+                <p className="text-muted mb-0">Demos cortas y vistas reales de nuestras plataformas y operaciones.</p>
               </div>
-              <Button asChild variant="outline">
-                <Link href="/products">Explorar productos</Link>
-              </Button>
+              <Button as={Link} href="/products" variant="outline-secondary">Explorar productos</Button>
             </div>
             <MediaGallery
               items={[
@@ -204,161 +186,28 @@ export default function Page() {
                 { type: "video", src: "https://media.w3.org/2010/05/bunny/trailer.mp4", poster: "/contact-center-ai-orchestration.png", alt: "Orquestación en contact center" },
               ]}
             />
-          </div>
-        </section>
-
-        {/* Casos reales */}
-        <section className="border-t">
-          <div className="container max-w-6xl mx-auto px-4 py-12 md:py-20">
-            <div className="flex items-center justify-between gap-3 flex-wrap">
-              <div>
-                <h2 className="text-3xl font-semibold">Casos reales</h2>
-                <p className="text-slate-600">Historias breves con impacto medible.</p>
-              </div>
-              <Button asChild variant="outline">
-                <Link href="/contact">Solicitar referentes</Link>
-              </Button>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-              <CaseCard
-                image={"/digital-energy-operations-center.png"}
-                title="Operación digital en energía"
-                desc="SRE + observabilidad end‑to‑end para plataformas críticas."
-                highlights={["-50% MTTR", "+99,95% uptime", "Alertas con bajo ruido"]}
-              />
-              <CaseCard
-                image={"/contact-center-bots.png"}
-                title="Autoservicio con IA en CX"
-                desc="Bots multimodales y orquestación sobre datos privados."
-                highlights={["-35% AHT", "+42% resolución 1er contacto", "CX medible con QA de conversaciones"]}
-              />
-              <CaseCard
-                image={"/industrial-drone-inspection.png"}
-                title="Inspección con drones"
-                desc="Planificación de misiones y visión computacional en terreno."
-                highlights={["+3x velocidad de inspección", "-60% incidentes", "Trazabilidad normativa"]}
-              />
-            </div>
-          </div>
+          </Container>
         </section>
 
         {/* CTA final */}
-        <section className="border-t bg-slate-900 text-white">
-          <div className="container max-w-6xl mx-auto px-4 py-14 md:py-20">
-            <div className="grid md:grid-cols-5 gap-8 items-center">
-              <div className="md:col-span-3">
-                <h2 className="text-3xl md:text-4xl font-semibold">Llevemos tus KPIs a otro nivel</h2>
-                <p className="mt-3 text-slate-300">
+        <section className="py-5 bg-dark text-white">
+          <Container>
+            <Row className="align-items-center gy-3">
+              <Col md={7}>
+                <h2 className="h2 fw-semibold">Llevemos tus KPIs a otro nivel</h2>
+                <p className="text-white-50 mb-0">
                   Conversemos de objetivos, <GlossaryLink termKey="sla">SLAs</GlossaryLink> y plazos. Prepararemos una ruta de valor a 90 días.
                 </p>
-              </div>
-              <div className="md:col-span-2 flex gap-3 md:justify-end">
-                <Button asChild size="lg" className="h-11 px-6 bg-emerald-600 hover:bg-emerald-500 text-slate-900">
-                  <Link href="/contact">Agenda una reunión</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="h-11 px-6 border-slate-700 text-white hover:bg-white/10">
-                  <Link href="/services">Ver metodología</Link>
-                </Button>
-              </div>
-            </div>
-          </div>
+              </Col>
+              <Col md={5} className="d-flex justify-content-md-end gap-2">
+                <Button as={Link} href="/contact" variant="success">Agenda una reunión</Button>
+                <Button as={Link} href="/services" variant="outline-light">Ver metodología</Button>
+              </Col>
+            </Row>
+          </Container>
         </section>
       </main>
       <SiteFooter />
     </div>
-  )
-}
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="16" height="16" className="inline-block">
-      <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  )
-}
-
-function ServiceCard({
-  icon,
-  title,
-  points,
-  outcome,
-}: {
-  icon: React.ReactNode
-  title: string
-  points: (string | React.ReactNode)[]
-  outcome: string
-}) {
-  return (
-    <Card className="hover:shadow-lg transition">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">{icon}{title}</CardTitle>
-        <CardDescription>De la estrategia a la operación</CardDescription>
-      </CardHeader>
-      <CardContent className="text-sm text-slate-600">
-        <ul className="list-disc pl-5 space-y-1">
-          {points.map((p, idx) => (<li key={idx}>{p}</li>))}
-        </ul>
-        <div className="mt-3 text-slate-700"><strong>Resultado: </strong>{outcome}</div>
-      </CardContent>
-    </Card>
-  )
-}
-
-function MethodCard({
-  icon,
-  title,
-  desc,
-  list,
-}: {
-  icon: React.ReactNode
-  title: string
-  desc: string
-  list: string[]
-}) {
-  return (
-    <Card className="hover:shadow-md transition">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-lg">{icon}{title}</CardTitle>
-        <CardDescription>{desc}</CardDescription>
-      </CardHeader>
-      <CardContent className="text-sm text-slate-600">
-        <ul className="list-disc pl-5 space-y-1">
-          {list.map((it) => (<li key={it}>{it}</li>))}
-        </ul>
-      </CardContent>
-    </Card>
-  )
-}
-
-function CaseCard({
-  image,
-  title,
-  desc,
-  highlights,
-}: {
-  image: string
-  title: string
-  desc: string
-  highlights: string[]
-}) {
-  return (
-    <Card className="overflow-hidden hover:shadow-lg transition">
-      <CardContent className="p-0">
-        <Image
-          src={image || "/placeholder.svg?height=450&width=800&query=caso%20de%20exito%20tecnologia"}
-          alt={title}
-          width={800}
-          height={450}
-          className="w-full aspect-[16/9] object-cover"
-        />
-      </CardContent>
-      <CardHeader>
-        <CardTitle className="text-lg">{title}</CardTitle>
-        <CardDescription>{desc}</CardDescription>
-      </CardHeader>
-      <div className="px-6 pb-6 text-sm text-slate-700 space-y-1">
-        {highlights.map((h) => (<div key={h}>{h}</div>))}
-      </div>
-    </Card>
   )
 }

@@ -2,10 +2,9 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, ShoppingCart } from 'lucide-react'
+import { Navbar, Container, Nav, Button, Offcanvas } from "react-bootstrap"
+import { useState } from "react"
+import { ShoppingCart } from 'lucide-react'
 import { useCart } from "./cart-provider"
 import CartSheet from "./cart-sheet"
 
@@ -21,56 +20,70 @@ const nav = [
 export default function SiteHeader() {
   const pathname = usePathname()
   const { openCart } = useCart()
+  const [show, setShow] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur">
-      <div className="container max-w-6xl mx-auto px-4 h-16 flex items-center">
-        <div className="flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2 font-semibold">
-            <span className="inline-flex h-8 w-8 rounded-md bg-emerald-600" aria-hidden />
+    <>
+      <Navbar bg="light" expand="md" fixed="top" className="border-bottom">
+        <Container>
+          <Navbar.Brand as={Link} href="/" className="d-flex align-items-center gap-2">
+            <span className="d-inline-block rounded" style={{ width: 32, height: 32, backgroundColor: "#0ea5a4" }} aria-hidden />
             South Developers
-          </Link>
-        </div>
-        <nav className="ml-8 hidden md:flex items-center gap-4">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "text-sm text-muted-foreground hover:text-foreground transition",
-                pathname === item.href && "text-foreground font-medium"
-              )}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="ml-auto flex items-center gap-2">
-          <Button variant="outline" className="hidden md:inline-flex" asChild>
-            <Link href="/contact">Solicitar demo</Link>
-          </Button>
-          <Button variant="ghost" size="icon" onClick={openCart} aria-label="Abrir carrito">
-            <ShoppingCart className="w-5 h-5" />
-          </Button>
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menú">
-                <Menu className="w-5 h-5" />
+          </Navbar.Brand>
+          <div className="ms-auto d-flex align-items-center gap-2 d-md-none">
+            <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
+              <ShoppingCart size={18} />
+            </Button>
+            <Navbar.Toggle aria-controls="primary-nav" onClick={() => setShow(true)} />
+          </div>
+          <Navbar.Collapse id="primary-nav" className="d-none d-md-flex">
+            <Nav className="ms-3">
+              {nav.map((item) => (
+                <Nav.Link
+                  as={Link}
+                  href={item.href}
+                  key={item.href}
+                  active={pathname === item.href}
+                >
+                  {item.label}
+                </Nav.Link>
+              ))}
+            </Nav>
+            <div className="ms-auto d-flex align-items-center gap-2">
+              <Button as={Link} href="/contact" variant="outline-secondary">Solicitar demo</Button>
+              <Button variant="outline-secondary" onClick={openCart} aria-label="Abrir carrito">
+                <ShoppingCart size={18} />
               </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-72">
-              <div className="grid gap-3 mt-6">
-                {nav.map((item) => (
-                  <Link key={item.href} href={item.href} className="text-sm">
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
+            </div>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menú</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <Nav className="flex-column">
+            {nav.map((item) => (
+              <Nav.Link
+                as={Link}
+                href={item.href}
+                key={item.href}
+                active={pathname === item.href}
+                onClick={() => setShow(false)}
+              >
+                {item.label}
+              </Nav.Link>
+            ))}
+            <hr />
+            <Button as={Link} href="/contact" variant="primary" className="w-100">Solicitar demo</Button>
+          </Nav>
+        </Offcanvas.Body>
+      </Offcanvas>
+
       <CartSheet />
-    </header>
+      <div style={{ height: 64 }} aria-hidden /> {/* spacer for fixed navbar */}
+    </>
   )
 }
