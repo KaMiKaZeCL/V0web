@@ -208,6 +208,16 @@ import { Container, Row, Col, Button, Card, Badge } from "react-bootstrap"
 import { productHighlights } from "@/lib/data"
 
 export default function HomePage() {
+  const summary = (
+    <div className="p-3 border rounded-3 bg-white small mb-3">
+      <div className="fw-semibold mb-1">En 30 segundos</div>
+      <ul className="mb-0">
+        <li>Entendemos tu problema y proponemos una solución clara.</li>
+        <li>Definimos plazos y cómo mediremos el avance.</li>
+        <li>Entregamos en ciclos cortos para que veas resultados pronto.</li>
+      </ul>
+    </div>
+  )
   return (
     <>
       {/* Hero claro y directo */}
@@ -229,6 +239,9 @@ export default function HomePage() {
                 <li><strong>Seguridad activa</strong>: protección de datos, accesos correctos y respuesta rápida.</li>
                 <li><strong>Software a medida</strong>: se integra con lo que ya usas y crece con tu negocio.</li>
               </ul>
+
+              {summary}
+
               <div className="d-flex flex-wrap gap-2">
                 <Button as={Link} href="/store" className="btn-cta">Visitar Tienda</Button>
                 <Button as={Link} href="/services" variant="outline-secondary">Explorar Servicios</Button>
@@ -505,42 +518,144 @@ const StorePage = () => {
 export default StorePage
 
 // app/about/page.tsx
-import type { Metadata } from 'next'
+import Image from "next/image"
+import { Container, Row, Col, Badge } from "react-bootstrap"
 
-export const metadata: Metadata = {
-  title: 'Quiénes somos',
-  description: 'Conoce nuestra misión, visión y equipo de liderazgo.',
-  alternates: { canonical: '/about' },
-}
-
-const AboutPage = () => {
+export default function AboutPage() {
   return (
-    <div>
-      {/* Content for the about page */}
-    </div>
+    <section className="section">
+      <Container fluid="xl">
+        <Badge bg="secondary" className="rounded-pill">Quiénes somos</Badge>
+        <h1 className="h2 fw-semibold mt-2 text-gradient">Hacemos que la tecnología sea útil y confiable</h1>
+        <Row className="gy-4 align-items-start mt-1">
+          <Col md={6}>
+            <p className="text-muted">
+              Somos un equipo con años de experiencia llevando proyectos a producción.
+              Nuestro objetivo es simple: que la tecnología te ayude a vender más, atender mejor y trabajar con menos fricción.
+            </p>
+            <p className="text-muted">
+              Nos comprometemos con plazos y resultados. Mostramos el avance en tableros simples
+              y mantenemos todo funcionando estable, rápido y seguro.
+            </p>
+            <ul className="text-muted mb-0">
+              <li><strong>Hablamos claro</strong>: sin jerga innecesaria, con acuerdos visibles.</li>
+              <li><strong>Entregas frecuentes</strong>: vemos valor temprano y ajustamos contigo.</li>
+              <li><strong>Cuidado por los detalles</strong>: seguridad, calidad y buen desempeño.</li>
+            </ul>
+          </Col>
+          <Col md={6}>
+            <Row className="g-3">
+              <Col xs={6}>
+                <div className="ratio ratio-3x2 rounded-3 border overflow-hidden shadow-soft">
+                  <Image
+                    src={"/placeholder.svg?height=360&width=540&query=equipo%20trabajando%20colaboracion%20sobria"}
+                    alt="Equipo colaborando"
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              </Col>
+              <Col xs={6}>
+                <div className="ratio ratio-3x2 rounded-3 border overflow-hidden shadow-soft">
+                  <Image
+                    src={"/placeholder.svg?height=360&width=540&query=operacion%20confiable%20paneles%20claros"}
+                    alt="Operación confiable"
+                    fill
+                    style={{ objectFit: "cover" }}
+                  />
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   )
 }
-
-export default AboutPage
 
 // app/contact/page.tsx
-import type { Metadata } from 'next'
+"use client"
 
-export const metadata: Metadata = {
-  title: 'Contacto',
-  description: 'Agenda una conversación con nuestro equipo comercial y técnico.',
-  alternates: { canonical: '/contact' },
+import { Container, Row, Col, Form, Button, Badge } from "react-bootstrap"
+import { useState, useTransition } from "react"
+import { useToast } from "@/hooks/use-toast"
+
+async function submitLead(formData: FormData) {
+  "use server"
+  const payload = Object.fromEntries(formData.entries())
+  console.log("Nuevo lead:", payload)
+  await new Promise((r) => setTimeout(r, 800))
+  return { ok: true }
 }
 
-const ContactPage = () => {
+export default function ContactPage() {
+  const [pending, startTransition] = useTransition()
+  const { toast } = useToast()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [company, setCompany] = useState("")
+  const [message, setMessage] = useState("")
+
   return (
-    <div>
-      {/* Content for the contact page */}
-    </div>
+    <section className="section">
+      <Container fluid="xl">
+        <Badge bg="secondary" className="rounded-pill">Contacto</Badge>
+        <h1 className="h2 fw-semibold mt-2 text-gradient">Conversemos y armemos un plan simple</h1>
+        <Row className="gy-4 mt-1">
+          <Col lg={7}>
+            <Form
+              action={(formData) =>
+                startTransition(async () => {
+                  const res = await submitLead(formData)
+                  if (res.ok) {
+                    toast({ title: "Enviado", description: "Gracias, te contactaremos pronto." })
+                    setName(""); setEmail(""); setCompany(""); setMessage("")
+                  } else {
+                    toast({ title: "Error", description: "Intenta nuevamente", variant: "destructive" as any })
+                  }
+                })
+              }
+            >
+              <Row className="g-3">
+                <Col md={6}>
+                  <Form.Label>Nombre</Form.Label>
+                  <Form.Control name="name" required value={name} onChange={(e) => setName(e.target.value)} />
+                </Col>
+                <Col md={6}>
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control name="email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+                </Col>
+                <Col md={6}>
+                  <Form.Label>Empresa</Form.Label>
+                  <Form.Control name="company" value={company} onChange={(e) => setCompany(e.target.value)} />
+                </Col>
+                <Col md={12}>
+                  <Form.Label>Cuéntanos qué necesitas</Form.Label>
+                  <Form.Control as="textarea" name="message" rows={6} required value={message} onChange={(e) => setMessage(e.target.value)} />
+                </Col>
+              </Row>
+              <div className="mt-3">
+                <Button type="submit" disabled={pending} className="btn-cta">
+                  {pending ? "Enviando..." : "Enviar"}
+                </Button>
+              </div>
+            </Form>
+          </Col>
+          <Col lg={5}>
+            <div className="p-3 rounded-3 border">
+              <div className="fw-semibold">Qué puedes esperar</div>
+              <ul className="small text-muted mb-0 mt-2">
+                <li>Una llamada corta para entender tu objetivo.</li>
+                <li>Una propuesta simple con tareas, plazos y costos.</li>
+                <li>Entregas frecuentes para ver avances reales.</li>
+              </ul>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </section>
   )
 }
-
-export default ContactPage
 
 // components/hero-video.tsx
 import React from 'react'
